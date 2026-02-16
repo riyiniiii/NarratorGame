@@ -1,16 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NextSceneLoader : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnEnable()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //Only specify the sceneName or sceneBuildIntex will load the scene with the single mode
+        SceneManager.LoadScene("Scene 1", LoadSceneMode.Single);
     }
 }
