@@ -13,7 +13,6 @@ public class BackgroundController : MonoBehaviour
     {
         startPos = transform.position.x;
     }
-
     void update()
     {
         float distance = cam.transform.position.x * parallaxEffect;
