@@ -58,4 +58,10 @@ public class Playermovement : MonoBehaviour
         movement.x = input * speed * Time.deltaTime;
         transform.Translate(movement);
     }
+    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Hit: " + collision.gameObject.name);
+    }
+    
 }
