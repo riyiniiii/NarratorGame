@@ -257,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &124479276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1260,7 +1260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &702004732
 Transform:
   m_ObjectHideFlags: 0
@@ -2657,7 +2657,7 @@ MonoBehaviour:
   vcam: {fileID: 605387222}
   zoomInSize: 2.9
   normalSize: 5
-  zoomDuration: 1
+  zoomDuration: 2
   inkJSON: {fileID: 4900000, guid: a85a027b971e38e45abef8c92e830565, type: 3}
 --- !u!1 &1656264071
 GameObject:
@@ -2829,7 +2829,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1727484981
 Transform:
   m_ObjectHideFlags: 0
