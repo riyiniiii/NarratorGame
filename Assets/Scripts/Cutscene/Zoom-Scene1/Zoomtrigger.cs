@@ -11,23 +11,19 @@ public class ZoomTrigger : MonoBehaviour
     public float zoomDuration = 1f;
 
     [Header("Dialogue Settings")]
-    public TextAsset inkJSON;
+    public TextAsset inkJSON;   // Your Ink story file
 
     private DialogueManager dialogueManager;
     private bool triggered = false;
 
     private void Start()
     {
+        // Automatically find the DialogueManager singleton in the scene
         dialogueManager = DialogueManager.GetInstance();
 
         if (dialogueManager == null)
         {
-            Debug.LogError("No DialogueManager found!");
-        }
-
-        if (vcam == null)
-        {
-            Debug.LogError("CinemachineCamera is not assigned!");
+            Debug.LogError("No DialogueManager found in the scene!");
         }
     }
 
@@ -35,7 +31,6 @@ public class ZoomTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && !triggered)
         {
-            Debug.Log("Player entered trigger");
             triggered = true;
             StartCoroutine(CutsceneSequence(other.gameObject));
         }
@@ -43,45 +38,19 @@ public class ZoomTrigger : MonoBehaviour
 
     private IEnumerator CutsceneSequence(GameObject player)
     {
+        // Freeze player movement
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+        if (rb != null) rb.simulated = false;
 
-        // Freeze player
-        if (rb != null)
-            rb.simulated = false;
-
-        Debug.Log("Zooming in");
-
-        // Zoom in
+        // Smooth zoom in
         yield return StartCoroutine(SmoothZoom(zoomInSize));
+        
 
-        Debug.Log("Starting dialogue");
-
-        // Start dialogue
-        if (dialogueManager != null && inkJSON != null)
-        {
-            dialogueManager.EnterDialogueMode(inkJSON);
-        }
-        else
-        {
-            Debug.LogError("DialogueManager or Ink JSON missing!");
-        }
-
-        // Wait for dialogue to finish
-        while (dialogueManager != null && dialogueManager.dialogueIsPlaying)
-        {
-            yield return null;
-        }
-
-        Debug.Log("Zooming out");
-
-        // Zoom out
+        // Smooth zoom back out
         yield return StartCoroutine(SmoothZoom(normalSize));
 
         // Unfreeze player
-        if (rb != null)
-            rb.simulated = true;
-
-        Debug.Log("Cutscene finished");
+        if (rb != null) rb.simulated = true;
     }
 
     private IEnumerator SmoothZoom(float targetSize)
