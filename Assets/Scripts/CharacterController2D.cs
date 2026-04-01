@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 // This script is a basic 2D character controller that allows
 // the player to run and jump. It uses Unity's new input system,
@@ -9,6 +11,10 @@
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController2D : MonoBehaviour
 {
+    [SerializeField] private  float speed = 1.0f;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Animator animator;
+    private Vector2 movement;
 
     [Header("Movement Params")]
     public float runSpeed = 6.0f;
@@ -18,7 +24,11 @@ public class CharacterController2D : MonoBehaviour
     // components attached to player
     private BoxCollider2D coll;
     private Rigidbody2D rb;
-
+    
+    private float xPosLastFrame;
+    
+ 
+    
     // other
     private bool isGrounded = false;
 
@@ -42,6 +52,18 @@ public class CharacterController2D : MonoBehaviour
         HandleHorizontalMovement();
 
         HandleJumping();
+    }
+    
+    void Update()
+    {
+        //Code for moving left n right
+        float moveInput = Input.GetAxis("Horizontal"); 
+
+        if (moveInput < 0) {
+            spriteRenderer.flipX = true;
+        } else if (moveInput > 0) {
+            spriteRenderer.flipX = false;
+        }
     }
 
     private void UpdateIsGrounded()
@@ -70,6 +92,18 @@ public class CharacterController2D : MonoBehaviour
     {
         Vector2 moveDirection = InputManager.GetInstance().GetMoveDirection();
         rb.linearVelocity = new Vector2(moveDirection.x * runSpeed, rb.linearVelocity.y);
+        
+        {
+            float input = Input.GetAxis("Horizontal");
+            movement.x = input * speed * Time.deltaTime;
+            transform.Translate(movement);
+            if (input != 0){
+                animator.SetBool("isRunning", true);
+            }
+            else {
+                animator.SetBool("isRunning", false);
+            }
+        }
     }
 
     private void HandleJumping()
