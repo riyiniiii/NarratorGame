@@ -27,7 +27,7 @@ public class CSE_CameraZoom : CutsceneElementBase
     {
         float elapsedTime = 0;
 
-        // 🔥 ZOOM IN
+        // ZOOM IN
         while (elapsedTime < duration)
         {
             float t = elapsedTime / duration;
@@ -40,12 +40,12 @@ public class CSE_CameraZoom : CutsceneElementBase
 
         vCam.Lens.OrthographicSize = targetSize;
 
-        // ⏸️ Wait (for dialogue moment)
+        // Wait (for dialogue moment)
         yield return new WaitForSeconds(1f);
 
         elapsedTime = 0;
 
-        // 🔥 ZOOM OUT
+        // ZOOM OUT
         while (elapsedTime < duration)
         {
             float t = elapsedTime / duration;
@@ -59,7 +59,7 @@ public class CSE_CameraZoom : CutsceneElementBase
         // Restore original zoom
         vCam.Lens.OrthographicSize = originalSize;
 
-        // 🔥 Restore follow (IMPORTANT)
+        // Restore follow (IMPORTANT)
         vCam.Follow = originalFollow != null ? originalFollow : player;
         vCam.LookAt = player;
 
