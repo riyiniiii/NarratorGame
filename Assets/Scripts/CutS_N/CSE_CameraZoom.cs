@@ -6,11 +6,12 @@ public class CSE_CameraZoom : CutsceneElementBase
 {
     [SerializeField] private float targetSize = 3f; // smaller = more zoom
     [SerializeField] private Transform player; // assign in inspector
-
-    private CinemachineCamera vCam;
+    
 
     private float originalSize;
     private Transform originalFollow;
+    public CinemachineCamera vCam;
+    
 
     public override void Execute()
     {
