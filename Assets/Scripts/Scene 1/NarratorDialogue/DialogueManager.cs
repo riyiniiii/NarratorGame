@@ -9,23 +9,37 @@ using UnityEngine.EventSystems;
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("Params")]
+    [SerializeField] private float typingSpeed = 0.04f;
+
+
     [Header(("Dialogue UI"))]
 
     [SerializeField] private GameObject dialoguePanel;
+    
+    [SerializeField] private GameObject continueIcon;
 
     [SerializeField] private TextMeshProUGUI dialogueText;
 
     [SerializeField] private TextMeshProUGUI displayNameText;
 
-    [Header("Choices UI")] [SerializeField]
+    [Header("Choices UI")] 
     
-    private GameObject[] choices;
+    [SerializeField] private Animator portraitAnimator;
+
+    private Animator layoutAnimator;
+    
+    [SerializeField] private GameObject[] choices;
     
     private TextMeshProUGUI[] choicesText;
 
     private Story currentStory;
 
     public bool dialogueIsPlaying { get; private set; }
+
+    private bool canContinueToNextLine = false;
+        
+    private Coroutine displayLineCoroutine;
 
     private static DialogueManager instance;
 
@@ -56,6 +70,9 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         
+        //get the layout animator
+        layoutAnimator = dialoguePanel.GetComponent<Animator>();
+        
         // get all of the choice text
         choicesText = new TextMeshProUGUI[choices.Length];
         int index = 0;
@@ -72,14 +89,15 @@ public class DialogueManager : MonoBehaviour
         {
             return;
         }
+        
+        //handle continuing to the next line in the dialogue when submit is pressed
 
-        if (InputManager.GetInstance().GetSubmitPressed())
+        if (canContinueToNextLine
+            && currentStory.currentChoices.Count == 0
+            && InputManager.GetInstance().GetSubmitPressed())
         {
-            // ONLY continue if there are NO choices
-            if (currentStory.currentChoices.Count == 0)
-            {
                 ContinueStory();
-            }
+            
         }
     }
     
@@ -90,7 +108,11 @@ public class DialogueManager : MonoBehaviour
             dialogueIsPlaying = true;
             dialoguePanel.SetActive(true);
             
-
+            //RESET portrait, layouts, and speaker
+            displayNameText.text = "???";
+            portraitAnimator.Play("Narrator");
+            layoutAnimator.Play("right");   
+                
             ContinueStory();
         }
 
@@ -108,9 +130,12 @@ public class DialogueManager : MonoBehaviour
             if (currentStory.canContinue)
             {
                 //set text for the current dialogue line
-                dialogueText.text = currentStory.Continue();
-                //display choices
-                DisplayChoices();
+                if (displayLineCoroutine != null)
+                {
+                    StopCoroutine(displayLineCoroutine);
+                }
+                displayLineCoroutine = StartCoroutine(DisplayLine(currentStory.Continue()));
+             
                 //HANDLE TAGS
                 HandleTags(currentStory.currentTags);
             }
@@ -119,6 +144,46 @@ public class DialogueManager : MonoBehaviour
                 StartCoroutine(ExitDialogueMode());
             }
         }
+        
+        private IEnumerator DisplayLine(string line)
+        {
+            //empty the dialogue text
+            dialogueText.text = "";
+            //hide items while text is typing
+            continueIcon.SetActive(false);
+            HideChoices();
+                
+            canContinueToNextLine = false;
+            
+            // display each letter one at a time
+            foreach (char letter in line.ToCharArray())
+            {
+                // if the submmit button i spressed finish up displaying th eline right away
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    dialogueText.text = line;
+                    break;
+                }
+                
+                dialogueText.text += letter;
+                yield return new WaitForSeconds(typingSpeed);
+            }
+
+            continueIcon.SetActive(true);
+            DisplayChoices();
+            
+            canContinueToNextLine = true;
+
+        }
+
+        private void HideChoices()
+        {
+            foreach (GameObject choiceButton in choices)
+            {
+                choiceButton.SetActive(false);
+            }
+        }
+
 
         private void HandleTags(List<string> currentTags)
         {
@@ -141,13 +206,13 @@ public class DialogueManager : MonoBehaviour
                         displayNameText.text = tagValue;
                         break;
                     case PORTRAIT_TAG:
-                        Debug.Log("portrait=" +  tagValue);
+                        portraitAnimator.Play(tagValue);
                         break;
                     case LAYOUT_TAG:
-                        Debug.Log("layout=" +  tagValue);
+                        layoutAnimator.Play(tagValue);
                         break;
                     default:
-                        Debug.LogWarning("Tag came in but is not currently begind handled: " + tag);
+                        Debug.LogWarning("Tag came in but is not currently begin handled: " + tag);
                         break;
                 }
             }
@@ -191,7 +256,10 @@ public class DialogueManager : MonoBehaviour
 
         public void MakeChoice(int choiceIndex)
         {
-            currentStory.ChooseChoiceIndex(choiceIndex);
-            ContinueStory(); 
+            if (canContinueToNextLine)
+            {
+                currentStory.ChooseChoiceIndex(choiceIndex);
+                ContinueStory();   
+            }
         }
 }
