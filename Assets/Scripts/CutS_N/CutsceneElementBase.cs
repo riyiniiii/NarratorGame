@@ -9,7 +9,7 @@ public class CutsceneElementBase : MonoBehaviour
 
     public void Start()
     {
-        cutsceneHandler = GetComponent<CutsceneHandler>();
+        cutsceneHandler = GetComponentInParent<CutsceneHandler>();
     }
 
     public virtual void Execute()

@@ -15,6 +15,8 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI dialogueText;
 
+    [SerializeField] private TextMeshProUGUI displayNameText;
+
     [Header("Choices UI")] [SerializeField]
     
     private GameObject[] choices;
@@ -26,6 +28,13 @@ public class DialogueManager : MonoBehaviour
     public bool dialogueIsPlaying { get; private set; }
 
     private static DialogueManager instance;
+
+    private const string SPEAKER_TAG = "speaker";
+    
+    private const string PORTRAIT_TAG = "portrait";
+    
+    private const string LAYOUT_TAG = "layout";
+    
 
     private void Awake()
     {
@@ -66,15 +75,21 @@ public class DialogueManager : MonoBehaviour
 
         if (InputManager.GetInstance().GetSubmitPressed())
         {
-            ContinueStory();
+            // ONLY continue if there are NO choices
+            if (currentStory.currentChoices.Count == 0)
+            {
+                ContinueStory();
+            }
         }
     }
+    
 
     public void EnterDialogueMode(TextAsset inkJSON)
         {
             currentStory = new Story(inkJSON.text);
             dialogueIsPlaying = true;
             dialoguePanel.SetActive(true);
+            
 
             ContinueStory();
         }
@@ -94,12 +109,47 @@ public class DialogueManager : MonoBehaviour
             {
                 //set text for the current dialogue line
                 dialogueText.text = currentStory.Continue();
-                //display choices, if any, for this dialogue line
+                //display choices
                 DisplayChoices();
+                //HANDLE TAGS
+                HandleTags(currentStory.currentTags);
             }
             else
             {
                 StartCoroutine(ExitDialogueMode());
+            }
+        }
+
+        private void HandleTags(List<string> currentTags)
+        {
+            //loop through each tag and handle it accordingly
+            foreach (string tag in currentTags)
+            {
+                // parse the tag
+                string[] splitTag = tag.Split(':');
+                if (splitTag.Length != 2)
+                {
+                    Debug.LogWarning("Tags are not in correct format: " + tag);
+                }
+                string tagKey = splitTag[0].Trim();
+                string tagValue = splitTag[1].Trim();
+                
+                //handle the tag 
+                switch (tagKey)
+                {
+                    case SPEAKER_TAG:
+                        displayNameText.text = tagValue;
+                        break;
+                    case PORTRAIT_TAG:
+                        Debug.Log("portrait=" +  tagValue);
+                        break;
+                    case LAYOUT_TAG:
+                        Debug.Log("layout=" +  tagValue);
+                        break;
+                    default:
+                        Debug.LogWarning("Tag came in but is not currently begind handled: " + tag);
+                        break;
+                }
             }
         }
 
@@ -142,5 +192,6 @@ public class DialogueManager : MonoBehaviour
         public void MakeChoice(int choiceIndex)
         {
             currentStory.ChooseChoiceIndex(choiceIndex);
+            ContinueStory(); 
         }
 }

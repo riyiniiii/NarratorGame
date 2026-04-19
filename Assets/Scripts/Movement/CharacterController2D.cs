@@ -15,6 +15,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator animator;
     private Vector2 movement;
+    
 
     [Header("Movement Params")]
     public float runSpeed = 6.0f;

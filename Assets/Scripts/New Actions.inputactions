@@ -7,15 +7,6 @@
             "id": "9e1d21db-7136-4753-a9f6-59a70b04bc4c",
             "actions": [
                 {
-                    "name": "jump",
-                    "type": "Button",
-                    "id": "f7f1d80e-ff40-48ff-ad48-dee7dd315fdb",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "move",
                     "type": "Value",
                     "id": "1a9f7e4b-5bd7-4fad-a225-d54b6854ee1f",
@@ -44,17 +35,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "4fccf3e8-a25c-4cdd-a896-dad4c0c3a012",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "WASD",
                     "id": "48f4980c-4e4b-46c5-8428-26d961a07c2c",
@@ -178,8 +158,30 @@
                 },
                 {
                     "name": "",
+                    "id": "4134f9ba-663f-4692-9150-44c76031ce0f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "af16756e-942a-4f05-8b69-807a0a3e11f0",
                     "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ce56caf-0b8b-46f5-83e7-11b6308569c6",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
