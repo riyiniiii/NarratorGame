@@ -13,7 +13,7 @@ A cowardly Lamb runs up to you..
     -> next2
 
 === next1 ===
-"Could you help me escape from the <b><color=\#red>Wicked Wolf</color></b>? "He is going to eat me, you see!"   Says the terrified lamb.
+"Could you help me escape from the <color=FF0000>Wicked Wolf<color>? "He is going to eat me, you see!"   Says the terrified lamb.
 
 ->next3  
 
