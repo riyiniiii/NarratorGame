@@ -177,6 +177,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         isAddingRichTextTag = false;
                     }
+                    dialogueText.text += letter;
                 }
                 // IF NOT RICH TEXT, ADD THE NEXT LETTER AND WAIT A SMALL TIME
                 else 
