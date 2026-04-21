@@ -1,17 +1,28 @@
 -> start
 
 === start ===
-You feel a presence behind you.
+A cowardly Lamb runs up to you..
 
 + [Turn around]
-    You slowly turn...
-    -> next
+    "Can I help you?" 
+    -> next1
 
-+ [Ignore it]
++ [ignore]
    
-    You keep walking...
-    -> next
+    "Excuse me..?" Asks the uneasy Lamb.
+    -> next2
 
-=== next ===
-The feeling doesn't go away.
+=== next1 ===
+"Could you help me escape from the <b><color=\#red>Wicked Wolf</color></b>? "He is going to eat me, you see!"   Says the terrified lamb.
+
+->next3  
+
+=== next2 ===
+"I'm sorry to bother you... But would you please help me!" The lamb cries out.
+
+->next3 
+
+=== next3 ===
+You nod as the fearful lamb escapes deeper into the forest.
+
 -> END

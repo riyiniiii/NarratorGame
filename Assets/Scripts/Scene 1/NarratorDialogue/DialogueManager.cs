@@ -85,6 +85,8 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(InputManager.GetInstance());
+        
         if (!dialogueIsPlaying)
         {
             return;
@@ -154,6 +156,8 @@ public class DialogueManager : MonoBehaviour
             HideChoices();
                 
             canContinueToNextLine = false;
+
+            bool isAddingRichTextTag = false;
             
             // display each letter one at a time
             foreach (char letter in line.ToCharArray())
@@ -164,9 +168,22 @@ public class DialogueManager : MonoBehaviour
                     dialogueText.text = line;
                     break;
                 }
-                
-                dialogueText.text += letter;
-                yield return new WaitForSeconds(typingSpeed);
+
+                // check for rich text tag, if found, add it without waiting
+                if (letter == '<' || isAddingRichTextTag) 
+                {
+                    isAddingRichTextTag = true;
+                    if (letter == '>')
+                    {
+                        isAddingRichTextTag = false;
+                    }
+                }
+                // IF NOT RICH TEXT, ADD THE NEXT LETTER AND WAIT A SMALL TIME
+                else 
+                {
+                    dialogueText.text += letter;
+                    yield return new WaitForSeconds(typingSpeed);
+                }
             }
 
             continueIcon.SetActive(true);
