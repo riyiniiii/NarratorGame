@@ -148,8 +148,21 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                npc.GetComponent<CSE_NPCWander>().RunAway();
-                StartCoroutine(FadeInHowl());
+                CSE_NPCWander npcScript = npc.GetComponent<CSE_NPCWander>();
+
+                foreach (string tag in currentStory.currentTags)
+                {
+                    if (tag.Trim() == "runaway" && npcScript != null)
+                    {
+                        npcScript.RunAway();
+                    }
+
+                    if (tag.Trim() == "wolf_howl")
+                    {
+                        StartCoroutine(FadeInHowl());
+                    }
+                }
+
                 StartCoroutine(ExitDialogueMode());
             }
         }

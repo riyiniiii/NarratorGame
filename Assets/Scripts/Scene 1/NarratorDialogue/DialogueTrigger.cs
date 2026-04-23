@@ -5,6 +5,8 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 
 {
+    [SerializeField] private bool autoStartDialogue;
+    
     [Header("Visual Cue")] [SerializeField]
     private GameObject visualCue;
 
@@ -39,9 +41,14 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.CompareTag("Player"))
         {
             playerInRange = true;
+
+            if (autoStartDialogue && !DialogueManager.GetInstance().dialogueIsPlaying)
+            {
+                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+            }
         }
     }
 

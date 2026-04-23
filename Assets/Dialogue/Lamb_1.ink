@@ -23,6 +23,7 @@ A cowardly Lamb runs up to you..
 ->next3 
 
 === next3 ===
-You nod as the fearful lamb escapes deeper into the forest.
-
+You nod as the fearful lamb escapes deeper into the forest. 
+# wolf_howl
+# runaway
 -> END
