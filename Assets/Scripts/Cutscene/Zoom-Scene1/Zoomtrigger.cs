@@ -38,19 +38,25 @@ public class ZoomTrigger : MonoBehaviour
 
     private IEnumerator CutsceneSequence(GameObject player)
     {
-        // Freeze player movement
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-        if (rb != null) rb.simulated = false;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
 
-        // Smooth zoom in
         yield return StartCoroutine(SmoothZoom(zoomInSize));
-        
 
-        // Smooth zoom back out
+        dialogueManager.EnterDialogueMode(inkJSON);
+
+        yield return new WaitUntil(() => !dialogueManager.dialogueIsPlaying);
+
         yield return StartCoroutine(SmoothZoom(normalSize));
 
-        // Unfreeze player
-        if (rb != null) rb.simulated = true;
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     private IEnumerator SmoothZoom(float targetSize)
