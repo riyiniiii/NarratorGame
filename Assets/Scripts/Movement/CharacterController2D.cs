@@ -45,6 +45,8 @@ public class CharacterController2D : MonoBehaviour
     {
         if (DialogueManager.GetInstance().dialogueIsPlaying)
         {
+            rb.linearVelocity = Vector2.zero;
+            animator.SetBool("isRunning", false);
             return;
         } 
         
@@ -57,12 +59,18 @@ public class CharacterController2D : MonoBehaviour
     
     void Update()
     {
+        if (DialogueManager.GetInstance().dialogueIsPlaying)
+        {
+            return;
+        }
+
         //Code for moving left n right
         float moveInput = Input.GetAxis("Horizontal"); 
 
         if (moveInput < 0) {
             spriteRenderer.flipX = true;
-        } else if (moveInput > 0) {
+        } 
+        else if (moveInput > 0) {
             spriteRenderer.flipX = false;
         }
     }

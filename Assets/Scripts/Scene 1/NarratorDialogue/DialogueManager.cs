@@ -12,8 +12,15 @@ public class DialogueManager : MonoBehaviour
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.04f;
 
+    [Header("Wolf")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip wolfHowl;
+
+    [SerializeField] private GameObject wolf;
 
     [Header(("Dialogue UI"))]
+    
+    [SerializeField] private GameObject npc;
 
     [SerializeField] private GameObject dialoguePanel;
     
@@ -131,20 +138,48 @@ public class DialogueManager : MonoBehaviour
         {
             if (currentStory.canContinue)
             {
-                //set text for the current dialogue line
                 if (displayLineCoroutine != null)
                 {
                     StopCoroutine(displayLineCoroutine);
                 }
                 displayLineCoroutine = StartCoroutine(DisplayLine(currentStory.Continue()));
-             
-                //HANDLE TAGS
+
                 HandleTags(currentStory.currentTags);
             }
             else
             {
+                npc.GetComponent<CSE_NPCWander>().RunAway();
+                StartCoroutine(FadeInHowl());
                 StartCoroutine(ExitDialogueMode());
             }
+        }
+        
+        private IEnumerator FadeInHowl()
+        {
+            audioSource.clip = wolfHowl;
+            audioSource.volume = 0f;
+            audioSource.Play();
+
+            float duration = 3f;
+            float timer = 0f;
+
+            while (timer < duration)
+            {
+                timer += Time.deltaTime;
+                audioSource.volume = Mathf.Lerp(0f, 1f, timer / duration);
+                yield return null;
+            }
+
+            audioSource.volume = 1f;
+        }
+        
+        private IEnumerator WolfEvent()
+        {
+            audioSource.PlayOneShot(wolfHowl);
+
+            yield return new WaitForSeconds(10f);
+
+            wolf.SetActive(true);
         }
         
         private IEnumerator DisplayLine(string line)
