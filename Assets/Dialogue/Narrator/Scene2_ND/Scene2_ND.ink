@@ -1,4 +1,5 @@
-"Hmm, I don't recall including a lamb in this story... very unusual. Interesting take, but I'd like to see what else happens."
+#speaker:Narrator#portrait:Narrator#layout:right
+"Hmm, I don't recall including a lamb in this story... very unusual. Interesting take, but I'd like to see what else happens." 
 
 -> ND_Scene1
 

@@ -18,12 +18,26 @@ public class ZoomTrigger : MonoBehaviour
 
     private void Start()
     {
-        // Automatically find the DialogueManager singleton in the scene
+        // Automatically find the DialogueManager in the scene
         dialogueManager = DialogueManager.GetInstance();
 
         if (dialogueManager == null)
         {
             Debug.LogError("No DialogueManager found in the scene!");
+        }
+
+        BoxCollider2D box = GetComponent<BoxCollider2D>();
+
+        Collider2D player = Physics2D.OverlapBox(
+            box.bounds.center,
+            box.bounds.size,
+            0f
+        );
+
+        if (player != null && player.CompareTag("Player"))
+        {
+            triggered = true;
+            StartCoroutine(CutsceneSequence(player.gameObject));
         }
     }
 
