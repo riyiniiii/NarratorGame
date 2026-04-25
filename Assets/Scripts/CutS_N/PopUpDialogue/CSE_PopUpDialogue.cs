@@ -11,16 +11,32 @@ public class CSE_PopUpDialogue : CutsceneElementBase
     [SerializeField] private Animator anim;
     
     private bool isTextActive;
-
+    
     public override void Execute()
     {
-        anim.Play("FadeIn");
-        isTextActive = true;
-        popUpText.text = dialogue;
+        StartCoroutine(ShowPopup());
     }
+    private IEnumerator ShowPopup()
+    {
+        anim.Play("FadeIn");
+        popUpText.text = dialogue;
+
+        yield return new WaitForSeconds(3f);
+
+        anim.Play("FadeOut");
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(WaitAndAdvance());
+    }
+    
     private void Update()
     {
-     if (Input.GetKeyDown("Interact") && !isTextActive)
-         anim.Play("FadeOut");
+        if (Input.GetKeyDown(KeyCode.E) && isTextActive)
+        {
+            anim.Play("FadeOut");
+            isTextActive = false;
+            StartCoroutine(WaitAndAdvance());
+        }
     }
 }

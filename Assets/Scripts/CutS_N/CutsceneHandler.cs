@@ -13,7 +13,7 @@ public class CutsceneHandler : MonoBehaviour
 
     public void Start()
     {
-        cutsceneElements = GetComponents<CutsceneElementBase>();
+        cutsceneElements = GetComponentsInChildren<CutsceneElementBase>();
     }
 
     private void ExecuteCurrentElement()

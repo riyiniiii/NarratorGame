@@ -92,8 +92,6 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(InputManager.GetInstance());
-        
         if (!dialogueIsPlaying)
         {
             return;

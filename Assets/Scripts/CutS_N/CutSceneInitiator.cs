@@ -15,6 +15,9 @@ public class CutSceneInitiator : MonoBehaviour
    private void OnTriggerEnter2D(Collider2D collision)
    {
       if(collision.gameObject.tag == "Player")
-        cutsceneHandler.PlayNextElement();
+      {
+         Debug.Log("Triggered");
+         cutsceneHandler.PlayNextElement();
+      }
    }
 }
