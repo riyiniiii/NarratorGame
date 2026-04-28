@@ -15,12 +15,15 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator animator;
     private Vector2 movement;
+    public bool isHidden = false;
+    
     
 
     [Header("Movement Params")]
     public float runSpeed = 6.0f;
     public float jumpSpeed = 8.0f;
     public float gravityScale = 20.0f;
+    public bool canMove = true;
 
     // components attached to player
     private BoxCollider2D coll;
@@ -43,6 +46,21 @@ public class CharacterController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!canMove) 
+        {
+            rb.linearVelocity = Vector2.zero;
+            animator.SetBool("isRunning", false);
+            return;
+        }
+
+        if (isHidden || DialogueManager.GetInstance().dialogueIsPlaying)
+        {
+            rb.linearVelocity = Vector2.zero;
+            animator.SetBool("isRunning", false);
+            return;
+        }
+
+        
         if (DialogueManager.GetInstance().dialogueIsPlaying)
         {
             rb.linearVelocity = Vector2.zero;
@@ -123,6 +141,18 @@ public class CharacterController2D : MonoBehaviour
             isGrounded = false;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
         }
+    }
+    
+    public void SetHidden(bool hide)
+    {
+        isHidden = hide;
+
+        rb.linearVelocity = Vector2.zero;
+        animator.SetBool("isRunning", false);
+
+        spriteRenderer.enabled = !hide;
+
+        Debug.Log(hide ? "Player is now hidden" : "Player is visible");
     }
 
 }

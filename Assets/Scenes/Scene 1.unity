@@ -1001,9 +1001,11 @@ MonoBehaviour:
   speed: 6
   spriteRenderer: {fileID: 388558735}
   animator: {fileID: 388558744}
+  isHidden: 0
   runSpeed: 6
   jumpSpeed: 8
   gravityScale: 20
+  canMove: 1
 --- !u!61 &388558743
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2556,6 +2558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e973fc93483e74b8cb513a4e807b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoStartDialogue: 0
   visualCue: {fileID: 0}
   emoteAnimator: {fileID: 0}
   inkJSON: {fileID: 4900000, guid: ddb3e3850f289c741a5a6eb5794cbeca, type: 3}
@@ -2930,6 +2933,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typingSpeed: 0.05
+  audioSource: {fileID: 0}
+  wolfHowl: {fileID: 0}
+  wolf: {fileID: 0}
+  npc: {fileID: 0}
   dialoguePanel: {fileID: 498336200}
   continueIcon: {fileID: 942415190}
   dialogueText: {fileID: 1816306846}
@@ -3531,6 +3538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e973fc93483e74b8cb513a4e807b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoStartDialogue: 0
   visualCue: {fileID: 2134007334}
   emoteAnimator: {fileID: 1105437816}
   inkJSON: {fileID: 4900000, guid: 0d51b936b4c4c1341a6f77ef1f23ba80, type: 3}
