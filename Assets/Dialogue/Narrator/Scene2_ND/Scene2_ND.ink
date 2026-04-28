@@ -1,5 +1,5 @@
 #speaker:Narrator#portrait:Narrator#layout:right
-"Hmm, I don't recall including a lamb in this story... very unusual. Interesting take, but I'd like to see what else happens." 
+"Hmm, I don't recall including a lamb in this story... very unusual..." 
 
 -> ND_Scene1
 
@@ -9,19 +9,19 @@
 -> Look_AroundChoice
 
  === Look_AroundChoice ===
- Huh? Can you hear me? Why are you looking into your surroundings? //blob
+ Huh? Can you hear me? Why are you looking around? //blob
  
 + [nod] //Player choice
 ->nod_choice1
 
 === nod_choice1 ===
-Wow. You are certainly very different from the other witches, aren't you? I don't remember giving you this gift of hearing me.
+Wow. You are certainly very different from the other witches, aren't you?
 
 + [?] //Player choice
 ->confused_choice
 
 ===confused_choice ===
-Oh, right. You don't have your memories, do you? What an intriguing turn of events. Since you can hear me, I'll tell you who I am as a thank you for being able to surprise me. I am often called the Storyteller.  //Blob
+Oh, right. You don't have your memories, do you? What an intriguing turn of events. Since you can hear me, I'll tell you who I am. I am the Storyteller.  //Blob
 
 +[??] //Player choice
 ->confused_choice2

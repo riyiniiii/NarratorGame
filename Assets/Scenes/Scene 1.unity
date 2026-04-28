@@ -2936,7 +2936,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   wolfHowl: {fileID: 0}
   wolf: {fileID: 0}
-  npc: {fileID: 0}
+  npc: {fileID: 1663270350}
   dialoguePanel: {fileID: 498336200}
   continueIcon: {fileID: 942415190}
   dialogueText: {fileID: 1816306846}
@@ -3541,7 +3541,7 @@ MonoBehaviour:
   autoStartDialogue: 0
   visualCue: {fileID: 2134007334}
   emoteAnimator: {fileID: 1105437816}
-  inkJSON: {fileID: 4900000, guid: 0d51b936b4c4c1341a6f77ef1f23ba80, type: 3}
+  inkJSON: {fileID: 4900000, guid: 05fbb7777d9bdec49a61ea4a97c4bc5c, type: 3}
 --- !u!1 &1206099126
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,5 +15,5 @@
 
  === Ignore_Choice ===
 
-"I said <b>wake up<b>"
+"<b>I said wake up<b>"
  -> Awake_Choice
