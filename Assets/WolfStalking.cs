@@ -4,25 +4,51 @@ using System.Collections;
 public class WolfStalking : MonoBehaviour
 {
     public Transform player;
-    public float speed = 5f;
+
+    public float normalSpeed = 5f;
+    public float slowedSpeed = 0.5f;
+    public float speedChangeRate = 3f;
+
     public float stopDistance = 1.5f;
     public float fadeSpeed = 2f;
-    public float spawnDistance = 2f;
 
-    private bool stalkingActive = false;
+    private float currentSpeed;
+    private bool stalkingActive;
+
     private SpriteRenderer sr;
     private Coroutine vanishRoutine;
 
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        currentSpeed = normalSpeed;
     }
 
     private void Update()
     {
         if (!stalkingActive || player == null) return;
 
-        if (IsPlayerLookingAtWolf())
+        bool isLooking = IsPlayerLookingAtWolf();
+
+        float targetSpeed = isLooking ? slowedSpeed : normalSpeed;
+        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * speedChangeRate);
+
+        FollowPlayer();
+        HandleVisibility(isLooking);
+    }
+
+    private void FollowPlayer()
+    {
+        float dist = Vector2.Distance(transform.position, player.position);
+        if (dist <= stopDistance) return;
+
+        Vector2 dir = (player.position - transform.position).normalized;
+        transform.position += (Vector3)(dir * currentSpeed * Time.deltaTime);
+    }
+
+    private void HandleVisibility(bool isLooking)
+    {
+        if (isLooking)
         {
             if (vanishRoutine == null)
                 vanishRoutine = StartCoroutine(Vanish());
@@ -36,62 +62,20 @@ public class WolfStalking : MonoBehaviour
             }
 
             Appear();
-            FollowPlayer();
         }
     }
 
-    bool IsPlayerLookingAtWolf()
+    private bool IsPlayerLookingAtWolf()
     {
-        SpriteRenderer playerSR = player.GetComponent<SpriteRenderer>();
-        if (playerSR == null) return false;
+        SpriteRenderer psr = player.GetComponent<SpriteRenderer>();
+        if (psr == null) return false;
 
-        bool facingRight = !playerSR.flipX;
-        bool wolfIsRight = transform.position.x > player.position.x;
+        bool facingRight = !psr.flipX;
+        bool wolfRight = transform.position.x > player.position.x;
 
-        return (facingRight && wolfIsRight) || (!facingRight && !wolfIsRight);
+        return (facingRight && wolfRight) || (!facingRight && !wolfRight);
     }
 
-    private void FollowPlayer()
-    {
-        float distance = Vector2.Distance(transform.position, player.position);
-        if (distance <= stopDistance) return;
-
-        Vector2 dir = (player.position - transform.position).normalized;
-        transform.position += (Vector3)(dir * speed * Time.deltaTime);
-    }
-    
-    public void SpawnInFrontOfPlayer()
-    {
-        if (player == null) return;
-
-        SpriteRenderer playerSR = player.GetComponent<SpriteRenderer>();
-        if (playerSR == null) return;
-
-        bool facingRight = !playerSR.flipX;
-
-        Vector2 spawnOffset = facingRight ? Vector2.right : Vector2.left;
-        Vector2 spawnPosition = (Vector2)player.position + spawnOffset * spawnDistance;
-
-        transform.position = spawnPosition;
-
-        sr.enabled = true;
-        Color c = sr.color;
-        c.a = 1f;
-        sr.color = c;
-
-        Debug.Log("Wolf positioned for horror event (NOT started yet)");
-    }
-    
-    public void StartHorrorMode()
-    {
-        stalkingActive = true;
-        sr.enabled = true;
-
-        Color c = sr.color;
-        c.a = 1f;
-        sr.color = c;
-    }
-    
     private void Appear()
     {
         Color c = sr.color;
@@ -99,9 +83,9 @@ public class WolfStalking : MonoBehaviour
         sr.color = c;
     }
 
-    IEnumerator Vanish()
+    private IEnumerator Vanish()
     {
-        yield return new WaitForSeconds(0.2f); 
+        yield return new WaitForSeconds(0.2f);
 
         while (sr.color.a > 0.05f)
         {
@@ -111,7 +95,27 @@ public class WolfStalking : MonoBehaviour
             yield return null;
         }
 
-        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f);
+        sr.enabled = false;
+    }
+
+    // RESET FOR HORROR EVENT
+    public void ResetForHorrorEvent()
+    {
+        gameObject.SetActive(true);
+
+        sr.enabled = true;
+
+        Color c = sr.color;
+        c.a = 1f;
+        sr.color = c;
+
+        stalkingActive = false;
+
+        if (vanishRoutine != null)
+        {
+            StopCoroutine(vanishRoutine);
+            vanishRoutine = null;
+        }
     }
 
     public void ActivateStalking()

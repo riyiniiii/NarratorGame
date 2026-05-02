@@ -4,28 +4,39 @@ public class BushHide : MonoBehaviour
 {
     private bool playerInRange = false;
     private CharacterController2D player;
+    private bool hasBeenUsed = false;
 
+    public WolfHorrorEvent horrorEvent;
     public GameObject hidePrompt;
 
     private void Update()
     {
+        if (hasBeenUsed) return;
+
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
             player.SetHidden(true);
-            hidePrompt.SetActive(false);
 
-            Debug.Log("Player hidden");
+            hasBeenUsed = true;
+
+            if (hidePrompt != null)
+                hidePrompt.SetActive(false);
+
+            horrorEvent.TriggerEvent();
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (hasBeenUsed) return;
+
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
             player = other.GetComponent<CharacterController2D>();
 
-            hidePrompt.SetActive(true);
+            if (hidePrompt != null)
+                hidePrompt.SetActive(true);
         }
     }
 
@@ -34,7 +45,9 @@ public class BushHide : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            hidePrompt.SetActive(false);
+
+            if (hidePrompt != null)
+                hidePrompt.SetActive(false);
         }
     }
-}
+}  
