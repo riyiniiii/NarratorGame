@@ -10,10 +10,11 @@ public class WolfStalking : MonoBehaviour
     public float speedChangeRate = 3f;
 
     public float stopDistance = 1.5f;
-    public float fadeSpeed = 2f;
 
     private float currentSpeed;
+
     private bool stalkingActive;
+    public bool eventControlled = false;
 
     private SpriteRenderer sr;
     private Coroutine vanishRoutine;
@@ -26,16 +27,24 @@ public class WolfStalking : MonoBehaviour
 
     private void Update()
     {
-        if (!stalkingActive || player == null) return;
+        if (!stalkingActive && !eventControlled) return;
+        if (player == null) return;
 
         bool isLooking = IsPlayerLookingAtWolf();
 
-        float targetSpeed = isLooking ? slowedSpeed : normalSpeed;
-        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * speedChangeRate);
+  
+        if (stalkingActive)
+        {
+            float targetSpeed = isLooking ? slowedSpeed : normalSpeed;
+            currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * speedChangeRate);
+        }
 
         FollowPlayer();
+
         HandleVisibility(isLooking);
     }
+
+
 
     private void FollowPlayer()
     {
@@ -46,8 +55,12 @@ public class WolfStalking : MonoBehaviour
         transform.position += (Vector3)(dir * currentSpeed * Time.deltaTime);
     }
 
+    
+
     private void HandleVisibility(bool isLooking)
     {
+        if (!stalkingActive) return;
+
         if (isLooking)
         {
             if (vanishRoutine == null)
@@ -65,6 +78,42 @@ public class WolfStalking : MonoBehaviour
         }
     }
 
+    private void Appear()
+    {
+        if (!sr.enabled) sr.enabled = true;
+
+        Color c = sr.color;
+        c.a = Mathf.Lerp(c.a, 1f, Time.deltaTime * 4f);
+        sr.color = c;
+    }
+
+    private IEnumerator Vanish()
+    {
+        float duration = 0.25f;
+        float t = 0f;
+
+        Color start = sr.color;
+
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+
+            float alpha = Mathf.Lerp(1f, 0f, t / duration);
+            sr.color = new Color(start.r, start.g, start.b, alpha);
+
+            yield return null;
+        }
+
+        sr.color = new Color(start.r, start.g, start.b, 0f);
+
+       
+        sr.enabled = false;
+
+        vanishRoutine = null;
+    }
+
+    
+
     private bool IsPlayerLookingAtWolf()
     {
         SpriteRenderer psr = player.GetComponent<SpriteRenderer>();
@@ -76,50 +125,44 @@ public class WolfStalking : MonoBehaviour
         return (facingRight && wolfRight) || (!facingRight && !wolfRight);
     }
 
-    private void Appear()
+    
+
+    public void ActivateStalking()
     {
-        Color c = sr.color;
-        c.a = Mathf.Lerp(c.a, 1f, Time.deltaTime * fadeSpeed);
-        sr.color = c;
+        stalkingActive = true;
+        eventControlled = false;
     }
 
-    private IEnumerator Vanish()
+    public void ForceVanish()
     {
-        yield return new WaitForSeconds(0.2f);
-
-        while (sr.color.a > 0.05f)
-        {
-            Color c = sr.color;
-            c.a = Mathf.Lerp(c.a, 0f, Time.deltaTime * fadeSpeed);
-            sr.color = c;
-            yield return null;
-        }
-
-        sr.enabled = false;
-    }
-
-    // RESET FOR HORROR EVENT
-    public void ResetForHorrorEvent()
-    {
-        gameObject.SetActive(true);
-
-        sr.enabled = true;
-
-        Color c = sr.color;
-        c.a = 1f;
-        sr.color = c;
-
         stalkingActive = false;
+        eventControlled = false;
 
         if (vanishRoutine != null)
         {
             StopCoroutine(vanishRoutine);
             vanishRoutine = null;
         }
+
+        StartCoroutine(Vanish());
     }
 
-    public void ActivateStalking()
+    public void ResetForHorrorEvent()
     {
-        stalkingActive = true;
+        gameObject.SetActive(true);
+
+        sr.enabled = true;
+        Color c = sr.color;
+        c.a = 1f;
+        sr.color = c;
+
+        stalkingActive = false;
+        eventControlled = false;
+
+        if (vanishRoutine != null)
+        {
+            StopCoroutine(vanishRoutine);
+            vanishRoutine = null;
+        }
     }
 }

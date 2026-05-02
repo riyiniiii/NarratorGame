@@ -8,7 +8,14 @@ public class WolfVanishTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        wolf.ResetForHorrorEvent();
-        wolf.ActivateStalking();
+        if (wolf == null)
+        {
+            Debug.LogError("Wolf not assigned in WolfVanishTrigger!");
+            return;
+        }
+
+        Debug.Log("Wolf vanish trigger activated");
+
+        wolf.ForceVanish();
     }
 }
