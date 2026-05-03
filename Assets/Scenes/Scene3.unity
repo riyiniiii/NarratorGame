@@ -343,7 +343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 55611446}
-  - component: {fileID: 55611444}
+  - component: {fileID: 55611448}
   - component: {fileID: 55611447}
   m_Layer: 0
   m_Name: ReencounterWolfEvent
@@ -352,18 +352,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &55611444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55611443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09bbd02b331c65b4687b18336a7ea5a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &55611446
 Transform:
   m_ObjectHideFlags: 0
@@ -373,7 +361,7 @@ Transform:
   m_GameObject: {fileID: 55611443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 161.8, y: 13.351127, z: 0.8017552}
+  m_LocalPosition: {x: 144.09999, y: 13.351127, z: 0.8017552}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -477,6 +465,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &55611448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55611443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd02b331c65b4687b18336a7ea5a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1896722186}
+  wolf: {fileID: 131223083}
+  wolfStartPoint: {fileID: 683283944}
+  breathingSource: {fileID: 55611447}
+  inkJSON: {fileID: 4900000, guid: 1c722c9057302d9429fa4af14b31cc71, type: 3}
 --- !u!1 &72777051
 GameObject:
   m_ObjectHideFlags: 0
@@ -2810,6 +2815,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a1c20c4072ebc42ad07096a820dc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  height: 0.1
 --- !u!212 &593820445
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3414,7 +3421,7 @@ Transform:
   m_GameObject: {fileID: 801489065}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 232.2, y: 1.1342393, z: -10}
+  m_LocalPosition: {x: 151.8, y: 1.1342393, z: -10}
   m_LocalScale: {x: 1, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3988,7 +3995,7 @@ Transform:
   m_GameObject: {fileID: 994409188}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 232.2, y: 1.1342393, z: -10}
+  m_LocalPosition: {x: 151.8, y: 1.1342393, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5218,6 +5225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a1c20c4072ebc42ad07096a820dc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  height: 0.1
 --- !u!1 &1347955458
 GameObject:
   m_ObjectHideFlags: 0
@@ -6593,6 +6602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8989d0a1b00ad1341abb7b48aafad36e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reencounterEvent: {fileID: 55611448}
 --- !u!61 &1727580823
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6648,7 +6658,7 @@ Transform:
   m_GameObject: {fileID: 1727580821}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 182.1, y: 13.351127, z: 0.8017552}
+  m_LocalPosition: {x: 164.4, y: 13.351127, z: 0.8017552}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7356,7 +7366,7 @@ Transform:
   m_GameObject: {fileID: 1896722184}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 232.2, y: -1.0157608, z: 0}
+  m_LocalPosition: {x: 151.8, y: -1.0157608, z: 0}
   m_LocalScale: {x: 0.87815, y: 0.87815, z: 0.87815}
   m_ConstrainProportionsScale: 0
   m_Children:
