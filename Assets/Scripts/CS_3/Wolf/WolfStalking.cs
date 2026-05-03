@@ -13,7 +13,7 @@ public class WolfStalking : MonoBehaviour
 
     private float currentSpeed;
 
-    private bool stalkingActive;
+    public bool stalkingActive;
     public bool eventControlled = false;
 
     private SpriteRenderer sr;
@@ -132,7 +132,29 @@ public class WolfStalking : MonoBehaviour
         stalkingActive = true;
         eventControlled = false;
     }
+    
+    public void SetEventMode()
+    {
+        stalkingActive = false;
+        eventControlled = true;
 
+        // stop any vanish coroutine so wolf is fully visible for cutscene
+        if (vanishRoutine != null)
+        {
+            StopCoroutine(vanishRoutine);
+            vanishRoutine = null;
+        }
+
+        // ensure renderer is on and visible
+        if (sr != null)
+        {
+            sr.enabled = true;
+            Color c = sr.color;
+            c.a = 1f;
+            sr.color = c;
+        }
+    }
+    
     public void ForceVanish()
     {
         stalkingActive = false;
