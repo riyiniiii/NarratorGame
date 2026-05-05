@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 18764037}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -67.44, y: -1.0157608, z: 0}
+  m_LocalPosition: {x: -12, y: -1.0157608, z: 0}
   m_LocalScale: {x: 0.87815, y: 0.87815, z: 0.87815}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -738,7 +738,7 @@ MonoBehaviour:
   autoStartDialogue: 1
   visualCue: {fileID: 0}
   emoteAnimator: {fileID: 1714128222}
-  inkJSON: {fileID: 4900000, guid: 55c279d1c45a12649bd3b59fda65d74d, type: 3}
+  inkJSON: {fileID: 4900000, guid: 419473bab999b374d804792d98d7ed74, type: 3}
 --- !u!1 &278377718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,7 +1368,7 @@ Transform:
   m_GameObject: {fileID: 491085304}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -67.44, y: 1.1342393, z: -10}
+  m_LocalPosition: {x: -12, y: 1.1342393, z: -10}
   m_LocalScale: {x: 1, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1597,7 +1597,7 @@ Transform:
   m_GameObject: {fileID: 613732311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -67.44, y: 1.1342393, z: -10}
+  m_LocalPosition: {x: -12, y: 1.1342393, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -258,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 32411387}
   m_Layer: 0
-  m_Name: NarratorD_2
+  m_Name: NarratorD_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2945,7 +2945,7 @@ Transform:
   m_GameObject: {fileID: 1098866354}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.58, y: 1.1342393, z: -10}
+  m_LocalPosition: {x: -67.25, y: 1.1342393, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3045,7 +3045,7 @@ MonoBehaviour:
   autoStartDialogue: 1
   visualCue: {fileID: 430526604}
   emoteAnimator: {fileID: 1098768994}
-  inkJSON: {fileID: 4900000, guid: c95b9721f293e20448cd238f8a78425c, type: 3}
+  inkJSON: {fileID: 4900000, guid: 73af13dbaf8f0684fb79410133c1f147, type: 3}
 --- !u!1 &1186847873
 GameObject:
   m_ObjectHideFlags: 0
@@ -3153,7 +3153,7 @@ Transform:
   m_GameObject: {fileID: 1204774989}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.58, y: -1.0157608, z: 0}
+  m_LocalPosition: {x: -67.25, y: -1.0157608, z: 0}
   m_LocalScale: {x: 0.87815, y: 0.87815, z: 0.87815}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3927,7 +3927,7 @@ MonoBehaviour:
   autoStartDialogue: 1
   visualCue: {fileID: 430526604}
   emoteAnimator: {fileID: 1098768994}
-  inkJSON: {fileID: 4900000, guid: c95b9721f293e20448cd238f8a78425c, type: 3}
+  inkJSON: {fileID: 4900000, guid: d1d901c6034d2b146af76f6a1e2f2db4, type: 3}
 --- !u!1 &1464223386
 GameObject:
   m_ObjectHideFlags: 0
@@ -4561,7 +4561,7 @@ Transform:
   m_GameObject: {fileID: 1797633824}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -43.58, y: 1.1342393, z: -10}
+  m_LocalPosition: {x: -67.25, y: 1.1342393, z: -10}
   m_LocalScale: {x: 1, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
