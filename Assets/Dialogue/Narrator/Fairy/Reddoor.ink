@@ -5,6 +5,6 @@
 == start ==
 
  +[nod] 
-"<i> As the brave witch walked past the wicked wolf and the lying lamb, she was almost home to greet her beloved cat." </i> 
+"<i>As the brave witch walked past the wicked wolf and the lying lamb, she was almost home to greet her beloved cat."</i> 
 
 ->END
