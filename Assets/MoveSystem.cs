@@ -1,70 +1,57 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class MoveSystem : MonoBehaviour
 {
     public GameObject correctForm;
+
     private bool moving;
     private bool finish;
 
-    private float startPosX;
-    private float startPosY;
-
-    
+    private Vector3 offset;
     private Vector3 resetPosition;
 
     void Start()
     {
-        resetPosition = this.transform.localPosition;
+        resetPosition = transform.position;
+    }
 
+    void OnMouseDown()
+    {
+        if (finish) return;
+
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorld.z = 0f;
+
+        offset = transform.position - mouseWorld;
+        moving = true;
     }
 
     void Update()
     {
-        if (finish == false)
-        {
-            if (moving)
-            {
-                Vector3 mousePos;
-                mousePos = Input.mousePosition;
-                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-            
-                this.gameObject.transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - this.gameObject.transform.localPosition.z);
-            }
-        }
+        if (!moving || finish) return;
+
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorld.z = 0f;
+
+        transform.position = mouseWorld + offset;
     }
 
-    private void OnMouseDown()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 mousePos;
-            mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-            startPosX = mousePos.x - this.transform.localPosition.x;
-            startPosY = mousePos.y - this.transform.localPosition.y;
-
-            moving = true;
-        }
-    }
-
-    private void OnMouseUp()
+    void OnMouseUp()
     {
         moving = false;
 
-        if (Mathf.Abs(this.transform.localPosition.x - correctForm.transform.localPosition.x) <= 0.5f &&
-            Mathf.Abs(this.transform.localPosition.y - correctForm.transform.localPosition.y) <= 0.5f)
+        if (Vector2.Distance(transform.position, correctForm.transform.position) <= 0.5f)
         {
-            this.transform.position = new Vector3(correctForm.transform.position.x, correctForm.transform.position.y,correctForm.transform.position.z);
+            transform.position = correctForm.transform.position;
             finish = true;
-            
-            GameObject.Find("PointsHandler").GetComponent<WinScript>().AddPoints();
+
+            GameObject.Find("PointsHandler")
+                .GetComponent<WinScript>()
+                .AddPoints();
         }
         else
         {
-            this.transform.localPosition = new Vector3(resetPosition.x, resetPosition.y, resetPosition.z);
+            transform.position = resetPosition;
         }
     }
 }

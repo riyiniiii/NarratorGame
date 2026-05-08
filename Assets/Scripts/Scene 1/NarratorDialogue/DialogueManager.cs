@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
-
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -18,26 +18,24 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private GameObject wolf;
 
-    [Header(("Dialogue UI"))]
-    
+    [Header("Dialogue UI")]
     [SerializeField] private GameObject npc;
 
     [SerializeField] private GameObject dialoguePanel;
-    
+
     [SerializeField] private GameObject continueIcon;
 
     [SerializeField] private TextMeshProUGUI dialogueText;
 
     [SerializeField] private TextMeshProUGUI displayNameText;
 
-    [Header("Choices UI")] 
-    
+    [Header("Choices UI")]
     [SerializeField] private Animator portraitAnimator;
 
     private Animator layoutAnimator;
-    
+
     [SerializeField] private GameObject[] choices;
-    
+
     private TextMeshProUGUI[] choicesText;
 
     private Story currentStory;
@@ -45,17 +43,22 @@ public class DialogueManager : MonoBehaviour
     public bool dialogueIsPlaying { get; private set; }
 
     private bool canContinueToNextLine = false;
-        
+
     private Coroutine displayLineCoroutine;
 
     private static DialogueManager instance;
 
+    // NEW
+    private bool dialogueLocked = false;
+
+    // TAGS
     private const string SPEAKER_TAG = "speaker";
-    
+
     private const string PORTRAIT_TAG = "portrait";
-    
+
     private const string LAYOUT_TAG = "layout";
-    
+
+    private const string PUZZLE_TAG = "activate_puzzle";
 
     private void Awake()
     {
@@ -65,6 +68,9 @@ public class DialogueManager : MonoBehaviour
         }
 
         instance = this;
+
+        // OPTIONAL BUT RECOMMENDED
+        DontDestroyOnLoad(gameObject);
     }
 
     public static DialogueManager GetInstance()
@@ -75,17 +81,19 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         dialogueIsPlaying = false;
+
         dialoguePanel.SetActive(false);
-        
-        //get the layout animator
+
         layoutAnimator = dialoguePanel.GetComponent<Animator>();
-        
-        // get all of the choice text
+
         choicesText = new TextMeshProUGUI[choices.Length];
+
         int index = 0;
+
         foreach (GameObject choice in choices)
         {
             choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
+
             index++;
         }
     }
@@ -96,234 +104,329 @@ public class DialogueManager : MonoBehaviour
         {
             return;
         }
-        
-        //handle continuing to the next line in the dialogue when submit is pressed
 
+        // Continue dialogue
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0
             && InputManager.GetInstance().GetSubmitPressed())
         {
-                ContinueStory();
-            
-        }
-    }
-    
-
-    public void EnterDialogueMode(TextAsset inkJSON)
-        {
-            currentStory = new Story(inkJSON.text);
-            dialogueIsPlaying = true;
-            dialoguePanel.SetActive(true);
-            
-            //RESET portrait, layouts, and speaker
-            displayNameText.text = "???";
-            portraitAnimator.Play("Narrator");
-            layoutAnimator.Play("right");   
-                
             ContinueStory();
         }
+    }
 
-        private IEnumerator ExitDialogueMode()
+    public void EnterDialogueMode(TextAsset inkJSON)
+    {
+        // PREVENT DIALOGUE REPLAY
+        if (dialogueLocked)
         {
-            yield return new WaitForSeconds(0.2f);
-            
-            dialogueIsPlaying = false;
-            dialoguePanel.SetActive(false);
-            dialogueText.text = "";
+            Debug.Log("Dialogue is locked during puzzle.");
+
+            return;
         }
 
-        private void ContinueStory()
-        {
-            if (currentStory.canContinue)
-            {
-                if (displayLineCoroutine != null)
-                {
-                    StopCoroutine(displayLineCoroutine);
-                }
-                displayLineCoroutine = StartCoroutine(DisplayLine(currentStory.Continue()));
+        currentStory = new Story(inkJSON.text);
 
-                HandleTags(currentStory.currentTags);
+        dialogueIsPlaying = true;
+
+        dialoguePanel.SetActive(true);
+
+        // Reset UI
+        displayNameText.text = "???";
+
+        portraitAnimator.Play("Narrator");
+
+        layoutAnimator.Play("right");
+
+        ContinueStory();
+    }
+
+    private IEnumerator ExitDialogueMode()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        dialogueIsPlaying = false;
+
+        dialoguePanel.SetActive(false);
+
+        dialogueText.text = "";
+    }
+
+    private void ContinueStory()
+    {
+        if (currentStory.canContinue)
+        {
+            if (displayLineCoroutine != null)
+            {
+                StopCoroutine(displayLineCoroutine);
+            }
+
+            string nextLine = currentStory.Continue();
+
+            // HANDLE TAGS FIRST
+            HandleTags(currentStory.currentTags);
+
+            displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
+        }
+        else
+        {
+            CSE_NPCWander npcScript = npc.GetComponent<CSE_NPCWander>();
+
+            foreach (string tag in currentStory.currentTags)
+            {
+                if (tag.Trim() == "runaway" && npcScript != null)
+                {
+                    npcScript.RunAway();
+                }
+
+                if (tag.Trim() == "wolf_howl")
+                {
+                    StartCoroutine(FadeInHowl());
+                }
+            }
+
+            StartCoroutine(ExitDialogueMode());
+        }
+    }
+
+    private IEnumerator FadeInHowl()
+    {
+        audioSource.clip = wolfHowl;
+
+        audioSource.volume = 0f;
+
+        audioSource.Play();
+
+        float duration = 3f;
+
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            audioSource.volume = Mathf.Lerp(0f, 1f, timer / duration);
+
+            yield return null;
+        }
+
+        audioSource.volume = 1f;
+    }
+
+    private IEnumerator WolfEvent()
+    {
+        audioSource.PlayOneShot(wolfHowl);
+
+        yield return new WaitForSeconds(10f);
+
+        wolf.SetActive(true);
+    }
+
+    private IEnumerator DisplayLine(string line)
+    {
+        dialogueText.text = "";
+
+        continueIcon.SetActive(false);
+
+        HideChoices();
+
+        canContinueToNextLine = false;
+
+        bool isAddingRichTextTag = false;
+
+        foreach (char letter in line.ToCharArray())
+        {
+            // Skip typing
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                dialogueText.text = line;
+
+                break;
+            }
+
+            // Rich text support
+            if (letter == '<' || isAddingRichTextTag)
+            {
+                isAddingRichTextTag = true;
+
+                if (letter == '>')
+                {
+                    isAddingRichTextTag = false;
+                }
+
+                dialogueText.text += letter;
             }
             else
             {
-                CSE_NPCWander npcScript = npc.GetComponent<CSE_NPCWander>();
+                dialogueText.text += letter;
 
-                foreach (string tag in currentStory.currentTags)
-                {
-                    if (tag.Trim() == "runaway" && npcScript != null)
-                    {
-                        npcScript.RunAway();
-                    }
-
-                    if (tag.Trim() == "wolf_howl")
-                    {
-                        StartCoroutine(FadeInHowl());
-                    }
-                }
-
-                StartCoroutine(ExitDialogueMode());
+                yield return new WaitForSeconds(typingSpeed);
             }
         }
-        
-        private IEnumerator FadeInHowl()
+
+        continueIcon.SetActive(true);
+
+        DisplayChoices();
+
+        canContinueToNextLine = true;
+    }
+
+    private void HideChoices()
+    {
+        foreach (GameObject choiceButton in choices)
         {
-            audioSource.clip = wolfHowl;
-            audioSource.volume = 0f;
-            audioSource.Play();
+            choiceButton.SetActive(false);
+        }
+    }
 
-            float duration = 3f;
-            float timer = 0f;
+    private void HandleTags(List<string> currentTags)
+    {
+        foreach (string tag in currentTags)
+        {
+            string[] splitTag = tag.Split(':');
 
-            while (timer < duration)
+            if (splitTag.Length != 2)
             {
-                timer += Time.deltaTime;
-                audioSource.volume = Mathf.Lerp(0f, 1f, timer / duration);
-                yield return null;
+                Debug.LogWarning("Tags are not in correct format: " + tag);
+
+                continue;
             }
 
-            audioSource.volume = 1f;
-        }
-        
-        private IEnumerator WolfEvent()
-        {
-            audioSource.PlayOneShot(wolfHowl);
+            string tagKey = splitTag[0].Trim();
 
-            yield return new WaitForSeconds(10f);
+            string tagValue = splitTag[1].Trim();
 
-            wolf.SetActive(true);
-        }
-        
-        private IEnumerator DisplayLine(string line)
-        {
-            //empty the dialogue text
-            dialogueText.text = "";
-            //hide items while text is typing
-            continueIcon.SetActive(false);
-            HideChoices();
-                
-            canContinueToNextLine = false;
-
-            bool isAddingRichTextTag = false;
-            
-            // display each letter one at a time
-            foreach (char letter in line.ToCharArray())
+            switch (tagKey)
             {
-                // if the submmit button i spressed finish up displaying th eline right away
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    dialogueText.text = line;
+                case SPEAKER_TAG:
+
+                    displayNameText.text = tagValue;
+
                     break;
-                }
 
-                // check for rich text tag, if found, add it without waiting
-                if (letter == '<' || isAddingRichTextTag) 
-                {
-                    isAddingRichTextTag = true;
-                    if (letter == '>')
-                    {
-                        isAddingRichTextTag = false;
-                    }
-                    dialogueText.text += letter;
-                }
-                // IF NOT RICH TEXT, ADD THE NEXT LETTER AND WAIT A SMALL TIME
-                else 
-                {
-                    dialogueText.text += letter;
-                    yield return new WaitForSeconds(typingSpeed);
-                }
-            }
+                case PORTRAIT_TAG:
 
-            continueIcon.SetActive(true);
-            DisplayChoices();
-            
-            canContinueToNextLine = true;
+                    portraitAnimator.Play(tagValue);
 
-        }
+                    break;
 
-        private void HideChoices()
-        {
-            foreach (GameObject choiceButton in choices)
-            {
-                choiceButton.SetActive(false);
+                case LAYOUT_TAG:
+
+                    layoutAnimator.Play(tagValue);
+
+                    break;
+
+                case PUZZLE_TAG:
+
+                    LoadPuzzleScene(tagValue);
+
+                    break;
+
+                default:
+
+                    Debug.LogWarning(
+                        "Tag came in but is not currently being handled: " + tag
+                    );
+
+                    break;
             }
         }
+    }
 
+    private void LoadPuzzleScene(string sceneName)
+    {
+        // LOCK dialogue during puzzle
+        dialogueLocked = true;
 
-        private void HandleTags(List<string> currentTags)
+        // Close dialogue before puzzle starts
+        StartCoroutine(ExitDialogueMode());
+
+        // Prevent duplicate loading
+        if (!SceneManager.GetSceneByName(sceneName).isLoaded)
         {
-            //loop through each tag and handle it accordingly
-            foreach (string tag in currentTags)
-            {
-                // parse the tag
-                string[] splitTag = tag.Split(':');
-                if (splitTag.Length != 2)
-                {
-                    Debug.LogWarning("Tags are not in correct format: " + tag);
-                }
-                string tagKey = splitTag[0].Trim();
-                string tagValue = splitTag[1].Trim();
-                
-                //handle the tag 
-                switch (tagKey)
-                {
-                    case SPEAKER_TAG:
-                        displayNameText.text = tagValue;
-                        break;
-                    case PORTRAIT_TAG:
-                        portraitAnimator.Play(tagValue);
-                        break;
-                    case LAYOUT_TAG:
-                        layoutAnimator.Play(tagValue);
-                        break;
-                    default:
-                        Debug.LogWarning("Tag came in but is not currently begin handled: " + tag);
-                        break;
-                }
-            }
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+
+            Debug.Log("Loaded puzzle scene: " + sceneName);
+        }
+        else
+        {
+            Debug.LogWarning("Scene already loaded: " + sceneName);
+        }
+    }
+
+    // CALLED AFTER PUZZLE COMPLETES
+    public void UnlockDialogue()
+    {
+        dialogueLocked = false;
+
+        Debug.Log("Dialogue unlocked.");
+    }
+
+    private void DisplayChoices()
+    {
+        List<Choice> currentChoices = currentStory.currentChoices;
+
+        if (currentChoices.Count > choices.Length)
+        {
+            Debug.LogError(
+                "More choices were given than the UI can support. Number of choices given: "
+                + currentChoices.Count
+            );
         }
 
-        private void DisplayChoices()
+        int index = 0;
+
+        foreach (Choice choice in currentChoices)
         {
-            List<Choice> currentChoices = currentStory.currentChoices;
+            choices[index].gameObject.SetActive(true);
 
-            if (currentChoices.Count > choices.Length)
-            {
-                Debug.LogError("more choices were given than the UI can support. Number of choices given: " + currentChoices.Count);
-            }
+            choicesText[index].text = choice.text;
 
-            int index = 0;
-            //enable and initialize the choices up to the amount of choices for this line of dialogue
-            foreach (Choice choice in currentChoices)
-            {
-                choices[index].gameObject.SetActive(true);
-                choicesText[index].text = choice.text;
-                index++;
-            }   
-            //go through the remaining choices the UI supports and make sure they're hidden
-            for (int i = index; i < choices.Length; i++)
-            {
-                choices[i].gameObject.SetActive(false);
-            }    
-            
-            StartCoroutine(SelectFirstChoice());
-
+            index++;
         }
 
-        private IEnumerator SelectFirstChoice()
+        for (int i = index; i < choices.Length; i++)
         {
-            // Event System requires we clear it first, then wait
-            // for at Least one frame before we set the current selected object
-            EventSystem.current.SetSelectedGameObject(null);
-            yield return new WaitForEndOfFrame();
-            EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+            choices[i].gameObject.SetActive(false);
         }
 
-        public void MakeChoice(int choiceIndex)
+        StartCoroutine(SelectFirstChoice());
+    }
+
+    private IEnumerator SelectFirstChoice()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+
+        yield return new WaitForEndOfFrame();
+
+        EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+    }
+
+    public void MakeChoice(int choiceIndex)
+    {
+        if (canContinueToNextLine)
         {
-            if (canContinueToNextLine)
-            {
-                currentStory.ChooseChoiceIndex(choiceIndex);
-                ContinueStory();   
-            }
+            currentStory.ChooseChoiceIndex(choiceIndex);
+
+            ContinueStory();
         }
+    }
+    
+    //two dialogue stuff
+    public void StartPuzzle(string sceneName)
+    {
+        StartCoroutine(StartPuzzleRoutine(sceneName));
+    }
+    
+    private IEnumerator StartPuzzleRoutine(string sceneName)
+    {
+        // Close dialogue
+        yield return StartCoroutine(ExitDialogueMode());
+
+        // Load puzzle scene
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+
+        Debug.Log("Puzzle scene loaded: " + sceneName);
+    }
+    
+    
 }
