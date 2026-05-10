@@ -44,6 +44,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ending/Bad Ending/BadMya.unity
     guid: 3810b67225c84ad4fa6dc35e2de1207f
+  - enabled: 1
+    path: Assets/Scenes/Ending/GoodEnding/AfterSirenCave.unity
+    guid: 6efe9e276a6d45a489c852944cf0d431
+  - enabled: 1
+    path: Assets/Scenes/Ending/GoodEnding/GoodEnding.unity
+    guid: 7895198399d42434e922da2f9fc82ebc
+  - enabled: 1
+    path: Assets/Scenes/Ending/GoodEnding/GoodMya.unity
+    guid: 11a0370fe6676e64dbad2d0d625278d3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 174784db4dba8e14e8568ee96d29f46f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

@@ -2822,7 +2822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb8922ad73f8954e80bff9d7211e3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: SirenCave
+  sceneToLoad: ' AfterSireCave'
 --- !u!61 &854878334
 BoxCollider2D:
   m_ObjectHideFlags: 0

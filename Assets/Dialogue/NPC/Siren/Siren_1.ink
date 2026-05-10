@@ -48,8 +48,9 @@ You found them...
 # play_sound:SirenSong
 'as the siren sings her melody a doorway begins to form' 
 # play_sound:HiddenDoorNoise
-"As promised, I'll help you get away from the Storyteller. It's important that you do not LISTEN to him. Go past whatever 'goal' he has for you. It will break the story and eventually you'll be free."
 # show_object:HiddenDoor
+"As promised, I'll help you get away from the Storyteller. It's important that you do not LISTEN to him. Go past whatever 'goal' he has for you. It will break the story and eventually you'll be free."
+
 "Go now quickly."
 
 -> END

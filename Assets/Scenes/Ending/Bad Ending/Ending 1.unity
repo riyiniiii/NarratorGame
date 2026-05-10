@@ -719,6 +719,8 @@ MonoBehaviour:
   audioSource: {fileID: 195510267}
   wolfHowl: {fileID: 8300000, guid: 6867e78b408f45f40bb56ca0d20826d5, type: 3}
   wolf: {fileID: 0}
+  sfxAudioSource: {fileID: 0}
+  sfxClips: []
   npc: {fileID: 290304573}
   dialoguePanel: {fileID: 2025403907}
   continueIcon: {fileID: 397020248}
@@ -729,6 +731,7 @@ MonoBehaviour:
   - {fileID: 149103319}
   - {fileID: 2135897549}
   - {fileID: 1050196044}
+  postPuzzleInkJSON: {fileID: 0}
 --- !u!4 &195510266
 Transform:
   m_ObjectHideFlags: 0
@@ -5146,7 +5149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1815979459
 Transform:
   m_ObjectHideFlags: 0
