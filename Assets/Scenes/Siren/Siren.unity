@@ -1728,6 +1728,8 @@ MonoBehaviour:
   audioSource: {fileID: 480008152}
   wolfHowl: {fileID: 8300000, guid: 6867e78b408f45f40bb56ca0d20826d5, type: 3}
   wolf: {fileID: 0}
+  sfxAudioSource: {fileID: 0}
+  sfxClips: []
   npc: {fileID: 177377298}
   dialoguePanel: {fileID: 1098768992}
   continueIcon: {fileID: 671373751}
@@ -1738,6 +1740,7 @@ MonoBehaviour:
   - {fileID: 211576703}
   - {fileID: 372670541}
   - {fileID: 256284383}
+  postPuzzleInkJSON: {fileID: 0}
 --- !u!4 &480008151
 Transform:
   m_ObjectHideFlags: 0

@@ -16,6 +16,11 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip wolfHowl;
     [SerializeField] private GameObject wolf;
+    
+    [Header("SFX")]
+    [SerializeField] private AudioSource sfxAudioSource;
+    [SerializeField] private AudioClip[] sfxClips;
+    private Dictionary<string, AudioClip> sfxDictionary;
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject npc;
@@ -45,6 +50,8 @@ public class DialogueManager : MonoBehaviour
     private const string PORTRAIT_TAG = "portrait";
     private const string LAYOUT_TAG = "layout";
     private const string PUZZLE_TAG = "activate_puzzle";
+    private const string SHOW_OBJECT_TAG = "show_object";
+    private const string SOUND_TAG = "play_sound";
 
     private void Awake()
     {
@@ -67,6 +74,12 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         layoutAnimator = dialoguePanel.GetComponent<Animator>();
+        
+        sfxDictionary = new Dictionary<string, AudioClip>();
+        foreach (AudioClip clip in sfxClips)
+        {
+            sfxDictionary[clip.name] = clip;
+        }
 
         choicesText = new TextMeshProUGUI[choices.Length];
         int index = 0;
@@ -253,6 +266,14 @@ public class DialogueManager : MonoBehaviour
                 case PUZZLE_TAG:
                     LoadPuzzleScene(tagValue);
                     break;
+                
+                case SHOW_OBJECT_TAG:
+                    ShowObject(tagValue);
+                    break;
+                
+                case SOUND_TAG:
+                    PlaySound(tagValue);
+                    break;
 
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
@@ -260,6 +281,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
+    
 
     private void LoadPuzzleScene(string sceneName)
     {
@@ -275,6 +297,33 @@ public class DialogueManager : MonoBehaviour
         {
             Debug.LogWarning("Scene already loaded: " + sceneName);
         }
+    }
+    
+    private void PlaySound(string clipName)
+    {
+        if (sfxDictionary.TryGetValue(clipName, out AudioClip clip))
+        {
+            sfxAudioSource.PlayOneShot(clip);
+        }
+        else
+        {
+            Debug.LogWarning("Could not find audio clip: " + clipName);
+        }
+    }
+    
+    private void ShowObject(string objectName)
+    {
+        Transform[] allObjects = Resources.FindObjectsOfTypeAll<Transform>();
+        foreach (Transform t in allObjects)
+        {
+            if (t.gameObject.scene.isLoaded && t.name == objectName)
+            {
+                t.gameObject.SetActive(true);
+                Debug.Log("Revealed: " + objectName);
+                return;
+            }
+        }
+        Debug.LogWarning("Could not find object: " + objectName);
     }
 
     // Called by WinScript when puzzle is completed
