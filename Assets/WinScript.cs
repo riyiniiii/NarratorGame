@@ -4,14 +4,11 @@ using UnityEngine.SceneManagement;
 public class WinScript : MonoBehaviour
 {
     private int pointsToWin;
-
     private int currentPoints;
 
     public GameObject Scales;
 
     [SerializeField] private string puzzleSceneName = "SRN_PUZZLE";
-    [SerializeField] private string postPuzzleKnot;
-    [SerializeField] private TextAsset postPuzzleDialogue;
 
     private bool puzzleCompleted = false;
 
@@ -25,7 +22,6 @@ public class WinScript : MonoBehaviour
         if (!puzzleCompleted && currentPoints >= pointsToWin)
         {
             puzzleCompleted = true;
-
             PuzzleComplete();
         }
     }
@@ -33,7 +29,6 @@ public class WinScript : MonoBehaviour
     public void AddPoints()
     {
         currentPoints++;
-
         Debug.Log("Points: " + currentPoints + "/" + pointsToWin);
     }
 
@@ -41,12 +36,10 @@ public class WinScript : MonoBehaviour
     {
         Debug.Log("Puzzle Completed!");
 
-        // UNLOCK DIALOGUE
+        // Unlock dialogue and trigger post-puzzle conversation
         DialogueManager.GetInstance().UnlockDialogue();
 
-        // UNLOAD PUZZLE
+        // Unload puzzle scene
         SceneManager.UnloadSceneAsync(puzzleSceneName);
     }
-    
-    
 }

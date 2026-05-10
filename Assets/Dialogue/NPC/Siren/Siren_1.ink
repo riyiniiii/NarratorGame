@@ -49,10 +49,8 @@ Isn't he following you?"
 === siren_after_puzzle ===
 # speaker:Siren
 # portrait:Siren
-
+# layout:right
 You found them...
-
 The storyteller will not like this.
-
 -> END
 

@@ -383,7 +383,7 @@ Transform:
   m_GameObject: {fileID: 46908369}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -68.8, y: -1.0157608, z: 0}
+  m_LocalPosition: {x: 6.61, y: -1.0157608, z: 0}
   m_LocalScale: {x: 0.87815, y: 0.87815, z: 0.87815}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3472,7 +3472,7 @@ Transform:
   m_GameObject: {fileID: 1358885147}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -68.8, y: 3.2842393, z: -10}
+  m_LocalPosition: {x: 6.61, y: 3.2842393, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5162,7 +5162,7 @@ Transform:
   m_GameObject: {fileID: 1823514366}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -68.8, y: 3.2842393, z: -10}
+  m_LocalPosition: {x: 6.61, y: 3.2842393, z: -10}
   m_LocalScale: {x: 1, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5539,6 +5539,7 @@ MonoBehaviour:
   continueIcon: {fileID: 1660114901}
   dialogueText: {fileID: 446853247}
   displayNameText: {fileID: 1914237521}
+  postPuzzleInkJSON: {fileID: 4900000, guid: 7ac41c86f569a094ea8c0c2a784549e7, type: 3}
   portraitAnimator: {fileID: 1655640582}
   choices:
   - {fileID: 559175994}

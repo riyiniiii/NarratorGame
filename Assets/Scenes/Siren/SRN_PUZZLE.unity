@@ -273,6 +273,7 @@ MonoBehaviour:
   Scales: {fileID: 750953897}
   puzzleSceneName: SRN_PUZZLE
   postPuzzleKnot: siren_after_puzzle
+  postPuzzleDialogue: {fileID: 4900000, guid: 7ac41c86f569a094ea8c0c2a784549e7, type: 3}
 --- !u!4 &282722602
 Transform:
   m_ObjectHideFlags: 0
