@@ -1895,7 +1895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoStartDialogue: 1
-  visualCue: {fileID: 0}
+  visualCue: {fileID: 104925115}
   emoteAnimator: {fileID: 550595811}
   inkJSON: {fileID: 4900000, guid: ed72fba0bd2cd99488688ec32418c2cd, type: 3}
 --- !u!1 &385704743
@@ -2866,7 +2866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

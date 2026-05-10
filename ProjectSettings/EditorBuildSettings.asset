@@ -24,17 +24,26 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene3.unity
     guid: cbfbd7daf5c67514fbebfba62e560b3b
   - enabled: 1
-    path: Assets/Scenes/Fairy.unity
+    path: Assets/Scenes/Fair/Fairy.unity
     guid: 4d2085e04a98e0c48a8e1477a25ae914
   - enabled: 1
-    path: Assets/Scenes/Siren.unity
+    path: Assets/Scenes/Siren/Siren.unity
     guid: 1ab482426e5ec904a85a1b2bbba0ab0e
   - enabled: 1
-    path: Assets/Scenes/SirenCave.unity
+    path: Assets/Scenes/Siren/SirenCave.unity
     guid: 06fa3bc9081b1474a9c65b5576127c7d
   - enabled: 1
-    path: Assets/Scenes/SRN_PUZZLE.unity
+    path: Assets/Scenes/Siren/SRN_PUZZLE.unity
     guid: b548db919b676194fa92b9e38875781f
+  - enabled: 1
+    path: Assets/Scenes/Ending/Bad Ending/Ending 1.unity
+    guid: a3d717be3e8c1784ba93efb73a24b6cb
+  - enabled: 1
+    path: Assets/Scenes/Ending/Bad Ending/BadEnding.unity
+    guid: f88991c28133ef64282f855eaffd0a66
+  - enabled: 1
+    path: Assets/Scenes/Ending/Bad Ending/BadMya.unity
+    guid: 3810b67225c84ad4fa6dc35e2de1207f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 174784db4dba8e14e8568ee96d29f46f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

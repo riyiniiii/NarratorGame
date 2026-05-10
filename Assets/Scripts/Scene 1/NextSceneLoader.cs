@@ -1,13 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
 
 public class NextSceneLoader : MonoBehaviour
 {
-    private void OnEnable()
+    [SerializeField] private string sceneName;
+    [SerializeField] private PlayableDirector director;
+
+    private void Start()
     {
-        //Only specify the sceneName or sceneBuildIntex will load the scene with the single mode
-        SceneManager.LoadScene("Scene 1", LoadSceneMode.Single);
+        director.stopped += OnTimelineFinished;
+    }
+
+    private void OnTimelineFinished(PlayableDirector pd)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
