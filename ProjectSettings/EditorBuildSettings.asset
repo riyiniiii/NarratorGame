@@ -27,6 +27,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Fair/Fairy.unity
     guid: 4d2085e04a98e0c48a8e1477a25ae914
   - enabled: 1
+    path: Assets/Scenes/Fair/FairyDen.unity
+    guid: 6b0dfaedd24d9c347844f214f9b83f9d
+  - enabled: 1
+    path: Assets/Scenes/Fair/FRY_PUZZLE.unity
+    guid: 07604591706394949b880680e6d767e5
+  - enabled: 1
     path: Assets/Scenes/Siren/Siren.unity
     guid: 1ab482426e5ec904a85a1b2bbba0ab0e
   - enabled: 1
