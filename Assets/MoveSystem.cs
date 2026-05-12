@@ -19,13 +19,10 @@ public class MoveSystem : MonoBehaviour
     {
         if (finish) return;
 
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-                Camera.main.WorldToScreenPoint(transform.position).z)
-        );
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorld.z = 0f;
 
-        offset = transform.position - mouseWorld; // <- this was missing
+        offset = transform.position - mouseWorld;
         moving = true;
     }
 
@@ -33,13 +30,10 @@ public class MoveSystem : MonoBehaviour
     {
         if (!moving || finish) return;
 
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-                Camera.main.WorldToScreenPoint(transform.position).z)
-        );
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorld.z = 0f;
 
-        transform.position = mouseWorld + offset; 
+        transform.position = mouseWorld + offset;
     }
 
     void OnMouseUp()

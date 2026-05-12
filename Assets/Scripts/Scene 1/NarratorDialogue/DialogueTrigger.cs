@@ -1,33 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
+
 public class DialogueTrigger : MonoBehaviour
+
 {
     [SerializeField] private bool autoStartDialogue;
- 
-    [Header("Visual Cue")]
-    [SerializeField] private GameObject visualCue;
- 
-    [Header("Emote Animator")]
-    [SerializeField] private Animator emoteAnimator;
- 
-    [Header("Ink JSON")]
-    [SerializeField] private TextAsset inkJSON;
- 
+    
+    [Header("Visual Cue")] [SerializeField]
+    private GameObject visualCue;
+
+    [Header("Emote Animator")] [SerializeField]
+    private Animator emoteAnimator;
+
+    [Header("Ink JSON")] [SerializeField] private TextAsset inkJSON;
+
     private bool playerInRange;
- 
+
     private void Awake()
     {
         playerInRange = false;
         visualCue.SetActive(false);
     }
- 
+
     private void Update()
     {
-        if (playerInRange
-            && !DialogueManager.GetInstance().dialogueIsPlaying
-            && !DialogueManager.GetInstance().dialogueLocked) // hides cue during puzzles
+        if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
         {
             visualCue.SetActive(true);
             if (InputManager.GetInstance().GetInteractPressed())
@@ -40,20 +38,20 @@ public class DialogueTrigger : MonoBehaviour
             visualCue.SetActive(false);
         }
     }
- 
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
         {
             playerInRange = true;
- 
+
             if (autoStartDialogue && !DialogueManager.GetInstance().dialogueIsPlaying)
             {
                 DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
             }
         }
     }
- 
+
     private void OnTriggerExit2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player")
@@ -61,4 +59,6 @@ public class DialogueTrigger : MonoBehaviour
             playerInRange = false;
         }
     }
-}
+}   
+    
+    
