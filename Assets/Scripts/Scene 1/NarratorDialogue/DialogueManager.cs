@@ -16,11 +16,6 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip wolfHowl;
     [SerializeField] private GameObject wolf;
-    
-    [Header("Dialogue Sound")]
-    [SerializeField] private AudioSource dialogueAudioSource;
-    [SerializeField] private AudioClip[] dialogueSounds;
-    [SerializeField] private float dialogueSoundFrequency = 2;
  
     [Header("Dialogue UI")]
     [SerializeField] private GameObject npc;
@@ -96,26 +91,23 @@ public class DialogueManager : MonoBehaviour
         }
     }
  
-    public void EnterDialogueMode(TextAsset inkJSON, AudioClip[] npcSounds = null)
+    public void EnterDialogueMode(TextAsset inkJSON)
     {
         if (dialogueLocked)
         {
             Debug.Log("Dialogue is locked during puzzle.");
             return;
         }
-
-        // Use NPC sounds 
-        if (npcSounds != null && npcSounds.Length > 0)
-            dialogueSounds = npcSounds;
-
+ 
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
-
+ 
+        // Reset UI
         displayNameText.text = "???";
         portraitAnimator.Play("Narrator");
         layoutAnimator.Play("right");
-
+ 
         ContinueStory();
     }
  
@@ -194,10 +186,9 @@ public class DialogueManager : MonoBehaviour
         continueIcon.SetActive(false);
         HideChoices();
         canContinueToNextLine = false;
-
+ 
         bool isAddingRichTextTag = false;
-        int letterCount = 0;
-
+ 
         foreach (char letter in line.ToCharArray())
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -205,7 +196,7 @@ public class DialogueManager : MonoBehaviour
                 dialogueText.text = line;
                 break;
             }
-
+ 
             if (letter == '<' || isAddingRichTextTag)
             {
                 isAddingRichTextTag = true;
@@ -215,28 +206,15 @@ public class DialogueManager : MonoBehaviour
             else
             {
                 dialogueText.text += letter;
-                letterCount++;
-
-                if (letterCount % dialogueSoundFrequency == 0 && dialogueSounds.Length > 0)
-                {
-                    AudioClip clip = dialogueSounds[UnityEngine.Random.Range(0, dialogueSounds.Length)];
-                    dialogueAudioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-                    dialogueAudioSource.clip = clip;
-                    dialogueAudioSource.Play();
-                }
-
                 yield return new WaitForSeconds(typingSpeed);
             }
         }
-
-        // Stop sound when typing finishes
-        dialogueAudioSource.Stop();
-
+ 
         continueIcon.SetActive(true);
         DisplayChoices();
         canContinueToNextLine = true;
     }
-    
+ 
     private void HideChoices()
     {
         foreach (GameObject choiceButton in choices)

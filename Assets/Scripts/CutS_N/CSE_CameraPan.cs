@@ -22,21 +22,17 @@ public class CSE_CameraPan : CutsceneElementBase
 
     private IEnumerator PanCoroutine()
     {
-        // Lock player
-        CharacterController2D playerController = player.GetComponent<CharacterController2D>();
-        if (playerController != null) playerController.canMove = false;
-
-        // PAN TO TARGET
+        // 🔥 PAN TO TARGET
         vCam.Follow = panTarget;
+
+        // Wait for the pan (Cinemachine handles movement)
         yield return new WaitForSeconds(duration);
 
-        // PAN BACK TO PLAYER
+        // 🔥 PAN BACK TO PLAYER
         vCam.Follow = originalFollow != null ? originalFollow : player;
         vCam.LookAt = player;
-        yield return new WaitForSeconds(duration);
 
-        // Unlock player
-        if (playerController != null) playerController.canMove = true;
+        yield return new WaitForSeconds(duration);
 
         cutsceneHandler.PlayNextElement();
     }
