@@ -31,22 +31,34 @@ public class ShellGameManager : MonoBehaviour
 
     void Start()
     {
-        // Find player and camera from main scene at runtime
         characterController = FindObjectOfType<CharacterController2D>();
         virtualCamera = FindObjectOfType<CinemachineCamera>();
 
-        // Lock player and camera
         if (characterController != null)
         {
             characterController.canMove = false;
             characterController.SetHidden(true);
+            Debug.Log("Player found and locked!");
         }
-        if (virtualCamera != null) virtualCamera.enabled = false;
+        else
+        {
+            Debug.LogWarning("Player NOT found!");
+        }
+
+        if (virtualCamera != null)
+        {
+            virtualCamera.enabled = false;
+            Debug.Log("Camera found and locked!");
+        }
+        else
+        {
+            Debug.LogWarning("Camera NOT found!");
+        }
 
         ball.SetActive(false);
         StartCoroutine(StartGame());
     }
-
+    
     private IEnumerator StartGame()
     {
         correctShellIndex = Random.Range(0, shells.Length);
@@ -183,54 +195,24 @@ public class ShellGameManager : MonoBehaviour
             correctText.SetActive(true);
             yield return new WaitForSeconds(2f);
             correctText.SetActive(false);
-
-            // Unlock camera and player
-            if (virtualCamera != null) virtualCamera.enabled = true;
-            if (characterController != null)
-            {
-                characterController.canMove = true;
-                characterController.SetHidden(false);
-            }
-
-            // Unlock dialogue and unload puzzle scene
-            DialogueManager.GetInstance().UnlockDialogue();
-            SceneManager.UnloadSceneAsync(gameObject.scene.name);
         }
         else
         {
             wrongText.SetActive(true);
             yield return new WaitForSeconds(2f);
             wrongText.SetActive(false);
-
-            // Reset and replay
-            StartCoroutine(ResetPuzzle());
         }
-    }
+        
 
-    private IEnumerator ResetPuzzle()
-    {
-        // Lower all shells back down
-        foreach (GameObject shell in shells)
+        if (virtualCamera != null) virtualCamera.enabled = true;
+        if (characterController != null)
         {
-            StartCoroutine(LowerShell(shell));
-        }
-        yield return new WaitForSeconds(1f);
-
-        // Hide ball
-        ball.SetActive(false);
-
-        // Reset state
-        gameFinished = false;
-        playerCanGuess = false;
-
-        foreach (GameObject shell in shells)
-        {
-            shell.GetComponent<Shell>().SetClickable(false);
+            characterController.canMove = true;
+            characterController.SetHidden(false); // show player again
         }
 
-        yield return new WaitForSeconds(0.5f);
-
-        // Restart the game
-        yield return StartCoroutine(StartGame());
+        // Unlock dialogue and unload puzzle scene
+        DialogueManager.GetInstance().UnlockDialogue();
+        SceneManager.UnloadSceneAsync(gameObject.scene.name);
     }
 }
