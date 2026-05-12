@@ -383,7 +383,7 @@ Transform:
   m_GameObject: {fileID: 46908369}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -67.3, y: -1.0157608, z: 0}
+  m_LocalPosition: {x: 7.4, y: -1.0157608, z: 0}
   m_LocalScale: {x: 0.87815, y: 0.87815, z: 0.87815}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3375,7 +3375,8 @@ MonoBehaviour:
   emoteAnimator: {fileID: 2012806475}
   inkJSON: {fileID: 4900000, guid: 386b8d9105c173a4dbfa1900578e97ff, type: 3}
   npcDialogueSounds:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 075556681eb00994ba5e1a99991e4135, type: 3}
+  - {fileID: 8300000, guid: e7676ceded7b1344aad8cd65081cf0ef, type: 3}
 --- !u!1 &1146164940
 GameObject:
   m_ObjectHideFlags: 0
@@ -3807,7 +3808,7 @@ Transform:
   m_GameObject: {fileID: 1358885147}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -67.3, y: 3.2842393, z: -10}
+  m_LocalPosition: {x: 7.4, y: 3.2842393, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5498,7 +5499,7 @@ Transform:
   m_GameObject: {fileID: 1823514366}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -67.3, y: 3.2842393, z: -10}
+  m_LocalPosition: {x: 7.4, y: 3.2842393, z: -10}
   m_LocalScale: {x: 1, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5872,6 +5873,8 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   wolfHowl: {fileID: 8300000, guid: 6867e78b408f45f40bb56ca0d20826d5, type: 3}
   wolf: {fileID: 0}
+  sfxAudioSource: {fileID: 0}
+  sfxClips: []
   dialogueAudioSource: {fileID: 1943508465}
   dialogueSounds:
   - {fileID: 0}
