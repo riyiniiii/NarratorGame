@@ -1926,7 +1926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoStartDialogue: 1
-  visualCue: {fileID: 104925115}
+  visualCue: {fileID: 0}
   emoteAnimator: {fileID: 550595811}
   inkJSON: {fileID: 4900000, guid: ed72fba0bd2cd99488688ec32418c2cd, type: 3}
   npcDialogueSounds: []
@@ -6246,6 +6246,8 @@ MonoBehaviour:
   audioSource: {fileID: 1406756378}
   wolfHowl: {fileID: 8300000, guid: 6867e78b408f45f40bb56ca0d20826d5, type: 3}
   wolf: {fileID: 0}
+  sfxAudioSource: {fileID: 0}
+  sfxClips: []
   dialogueAudioSource: {fileID: 1406756379}
   dialogueSounds:
   - {fileID: 8300000, guid: 5727ab2ef081bfa458031946eaebc5c8, type: 3}

@@ -696,6 +696,7 @@ GameObject:
   - component: {fileID: 195510266}
   - component: {fileID: 195510265}
   - component: {fileID: 195510267}
+  - component: {fileID: 195510268}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -721,6 +722,9 @@ MonoBehaviour:
   wolf: {fileID: 0}
   sfxAudioSource: {fileID: 0}
   sfxClips: []
+  dialogueAudioSource: {fileID: 195510268}
+  dialogueSounds: []
+  dialogueSoundFrequency: 4
   npc: {fileID: 290304573}
   dialoguePanel: {fileID: 2025403907}
   continueIcon: {fileID: 397020248}
@@ -761,6 +765,103 @@ AudioSource:
   m_Resource: {fileID: 8300000, guid: 6867e78b408f45f40bb56ca0d20826d5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &195510268
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195510264}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1553,6 +1654,7 @@ MonoBehaviour:
   visualCue: {fileID: 0}
   emoteAnimator: {fileID: 2025403908}
   inkJSON: {fileID: 4900000, guid: 73af13dbaf8f0684fb79410133c1f147, type: 3}
+  npcDialogueSounds: []
 --- !u!1 &326941456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,6 +1911,7 @@ MonoBehaviour:
   visualCue: {fileID: 0}
   emoteAnimator: {fileID: 2025403908}
   inkJSON: {fileID: 4900000, guid: d1d901c6034d2b146af76f6a1e2f2db4, type: 3}
+  npcDialogueSounds: []
 --- !u!1 &451421643
 GameObject:
   m_ObjectHideFlags: 0
@@ -3626,6 +3729,7 @@ MonoBehaviour:
   visualCue: {fileID: 656977462}
   emoteAnimator: {fileID: 0}
   inkJSON: {fileID: 0}
+  npcDialogueSounds: []
 --- !u!114 &1222625080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5410,6 +5514,7 @@ MonoBehaviour:
   visualCue: {fileID: 814265850}
   emoteAnimator: {fileID: 2025403908}
   inkJSON: {fileID: 4900000, guid: b1adb65c852c4b942a88a0ab9a04ac6a, type: 3}
+  npcDialogueSounds: []
 --- !u!61 &1996990338
 BoxCollider2D:
   m_ObjectHideFlags: 0
