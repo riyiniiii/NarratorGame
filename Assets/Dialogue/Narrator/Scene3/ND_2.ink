@@ -1,5 +1,9 @@
 #speaker:Narrator #portrait:Narrator 
-“That was close... I wonder what the wolf wanted. Anyways it doesn't matter I believe I had enough of this story. Give me second while I change the story. Make sure to <b>stay here<b> "
+“That was close... I wonder what the wolf wanted. Anyways it doesn't matter I believe I had enough of this story. 
+
+Give me second while I change the story. 
+
+<b>Make sure to stay here<b> "
 ->start
 
 == start ==

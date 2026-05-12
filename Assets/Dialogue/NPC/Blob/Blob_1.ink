@@ -1,4 +1,4 @@
-#speaker:Blob #portrait:Blob #layout:right
+#speaker:??? #portrait:??? #layout:right
 Who are you? Who am I? Why is it dark? //blob
 
 -> Blob_1
