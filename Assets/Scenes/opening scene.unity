@@ -575,6 +575,8 @@ PlayableDirector:
     value: {fileID: 535318169}
   - key: {fileID: -1199492491301211292, guid: 65fb45643aea18942affe9a9286b1b45, type: 2}
     value: {fileID: 2142829578}
+  - key: {fileID: -7822795670129752176, guid: 65fb45643aea18942affe9a9286b1b45, type: 2}
+    value: {fileID: 1269769332}
   m_ExposedReferences:
     m_References:
     - 5c93721b0c17a8143b7181efed04832c: {fileID: 535318169}
@@ -691,7 +693,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269769332}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: feb987f2c4f931843b3f7fd6944f24f6, type: 3}
   m_Name: 
