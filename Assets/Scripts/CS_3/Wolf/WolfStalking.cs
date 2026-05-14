@@ -27,8 +27,8 @@ public class WolfStalking : MonoBehaviour
 
     private void Update()
     {
-        if (!stalkingActive && !eventControlled) return;
         if (player == null) return;
+        if (!stalkingActive) return;
 
         bool isLooking = IsPlayerLookingAtWolf();
 

@@ -38,6 +38,6 @@
  <i>You shake your head again.</i> 
  "Fine have it your way Witch."
  #wolf_howl
-
+# wolf_vanish
 
 -> END

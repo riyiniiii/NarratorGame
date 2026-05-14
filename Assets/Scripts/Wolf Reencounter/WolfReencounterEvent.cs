@@ -22,12 +22,12 @@ public class WolfReencounterEvent : MonoBehaviour
     {
         triggered = true;
 
-        // ️ freeze player
+        // freeze player
         player.canMove = false;
 
         yield return new WaitForSeconds(0.5f);
 
-        //  BREATHING START (tension cue BEFORE reveal)
+        // BREATHING START
         breathingSource.volume = 0f;
         breathingSource.Play();
 
@@ -39,10 +39,10 @@ public class WolfReencounterEvent : MonoBehaviour
             yield return null;
         }
 
-        // pause after breathing starts (build tension)
+        // pause after breathing starts
         yield return new WaitForSeconds(1.5f);
 
-        //  WOLF APPEARS AFTER BREATHING
+        // WOLF APPEARS
         wolf.gameObject.SetActive(true);
         wolf.position = wolfStartPoint.position;
 
@@ -52,7 +52,7 @@ public class WolfReencounterEvent : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        //  slow creepy step forward
+        // slow creepy step forward
         Vector3 start = wolf.position;
         Vector3 target = wolf.position + Vector3.left * 1f;
 
@@ -66,21 +66,26 @@ public class WolfReencounterEvent : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        //  dialogue
+        // disable stalking logic so look-detection doesn't interfere
+        WolfStalking wolfStalking = wolf.GetComponent<WolfStalking>();
+        if (wolfStalking != null) wolfStalking.SetEventMode();
+
+        // start dialogue
         DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
 
-        yield return new WaitForSeconds(2f);
+        // wait for dialogue to fully finish
+        yield return new WaitUntil(() => !DialogueManager.GetInstance().dialogueIsPlaying);
 
-        //  fade wolf out
+        // fade wolf out AFTER dialogue ends
         yield return StartCoroutine(FadeOut(wolf));
 
-        //  restore player
+        // restore player
         player.canMove = true;
     }
 
-    IEnumerator FadeOut(Transform wolf)
+    IEnumerator FadeOut(Transform wolfTransform)
     {
-        SpriteRenderer sr = wolf.GetComponent<SpriteRenderer>();
+        SpriteRenderer sr = wolfTransform.GetComponent<SpriteRenderer>();
 
         float t = 0f;
         while (t < 1f)
@@ -91,6 +96,7 @@ public class WolfReencounterEvent : MonoBehaviour
             yield return null;
         }
 
+        sr.color = new Color(1f, 1f, 1f, 0f);
         sr.enabled = false;
     }
 }

@@ -50,13 +50,19 @@ public class DialogueTrigger : MonoBehaviour
         {
             playerInRange = true;
 
-            if (autoStartDialogue && !DialogueManager.GetInstance().dialogueIsPlaying)
+            if (autoStartDialogue)
             {
-                DialogueManager.GetInstance().EnterDialogueMode(inkJSON, npcDialogueSounds);
+                StartCoroutine(AutoStartDelay());
             }
         }
     }
 
+    private IEnumerator AutoStartDelay()
+    {
+        yield return null;
+        DialogueManager.GetInstance().EnterDialogueMode(inkJSON, npcDialogueSounds);
+    }
+    
     private void OnTriggerExit2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player")

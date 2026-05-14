@@ -57,6 +57,7 @@ public class DialogueManager : MonoBehaviour
     private const string PUZZLE_TAG = "activate_puzzle";
     private const string SHOW_OBJECT_TAG = "show_object";
     private const string SOUND_TAG = "play_sound";
+    private const string WOLF_VANISH_TAG = "wolf_vanish";
 
     private void Awake()
     {
@@ -109,13 +110,12 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJSON, AudioClip[] npcSounds = null)
     {
-        if (dialogueLocked)
+        if (dialogueLocked || dialogueIsPlaying)
         {
-            Debug.Log("Dialogue is locked during puzzle.");
+            Debug.Log("Dialogue already playing or locked.");
             return;
         }
 
-        // Use NPC sounds if provided, otherwise fall back to default
         if (npcSounds != null && npcSounds.Length > 0)
             dialogueSounds = npcSounds;
 
@@ -168,6 +168,14 @@ public class DialogueManager : MonoBehaviour
                 {
                     StartCoroutine(FadeInHowl());
                 }
+                
+                if (tag.Trim() == "wolf_vanish" && wolf != null)
+                {
+                    WolfStalking wolfStalking = wolf.GetComponent<WolfStalking>();
+                    if (wolfStalking != null)
+                        wolfStalking.ForceVanish();
+                }
+                
             }
 
             StartCoroutine(ExitDialogueMode());
