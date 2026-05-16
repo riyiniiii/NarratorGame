@@ -1986,7 +1986,7 @@ MonoBehaviour:
   emoteAnimator: {fileID: 1523094673}
   inkJSON: {fileID: 4900000, guid: 77778960fb2703d4093fde42d7aafc13, type: 3}
   npcDialogueSounds:
-  - {fileID: 8300000, guid: 0dc7fc04dd4ebae44bc2af48b5af0e53, type: 3}
+  - {fileID: 8300000, guid: 2b48a73fd4bf2ce41b7202bc194ec03e, type: 3}
 --- !u!1 &347498573
 GameObject:
   m_ObjectHideFlags: 0
@@ -2363,9 +2363,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 2037256911
+  m_SortingLayer: 6
+  m_SortingOrder: 4
   m_Sprite: {fileID: -2542235907071663753, guid: 7ec01e1d22d24ca4381bafea05329436, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.2509804}
   m_FlipX: 0
@@ -2847,7 +2847,7 @@ MonoBehaviour:
   emoteAnimator: {fileID: 1523094673}
   inkJSON: {fileID: 4900000, guid: 87f99d6d694e70144a3f2914effe067d, type: 3}
   npcDialogueSounds:
-  - {fileID: 8300000, guid: 0dc7fc04dd4ebae44bc2af48b5af0e53, type: 3}
+  - {fileID: 8300000, guid: 2b48a73fd4bf2ce41b7202bc194ec03e, type: 3}
 --- !u!1 &447496115
 GameObject:
   m_ObjectHideFlags: 0
@@ -3850,15 +3850,14 @@ MonoBehaviour:
   sfxAudioSource: {fileID: 0}
   sfxClips: []
   dialogueAudioSource: {fileID: 680300882}
-  dialogueSounds:
-  - {fileID: 8300000, guid: 0dc7fc04dd4ebae44bc2af48b5af0e53, type: 3}
+  dialogueSounds: []
   dialogueSoundFrequency: 4
   npc: {fileID: 1909506814}
   dialoguePanel: {fileID: 1523094672}
   continueIcon: {fileID: 1272839397}
   dialogueText: {fileID: 1054624655}
   displayNameText: {fileID: 279482896}
-  portraitAnimator: {fileID: 1264839318}
+  portraitAnimator: {fileID: 1523094673}
   choices:
   - {fileID: 2090159531}
   - {fileID: 439615584}
@@ -3886,7 +3885,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680300878}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -3989,7 +3988,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8836,7 +8835,7 @@ MonoBehaviour:
   emoteAnimator: {fileID: 1523094673}
   inkJSON: {fileID: 4900000, guid: c8a1c7131d5c2114a8c560b9497f2fdc, type: 3}
   npcDialogueSounds:
-  - {fileID: 8300000, guid: 0dc7fc04dd4ebae44bc2af48b5af0e53, type: 3}
+  - {fileID: 8300000, guid: 2b48a73fd4bf2ce41b7202bc194ec03e, type: 3}
 --- !u!1 &1802599001
 GameObject:
   m_ObjectHideFlags: 0
@@ -9985,7 +9984,7 @@ MonoBehaviour:
   emoteAnimator: {fileID: 1523094673}
   inkJSON: {fileID: 4900000, guid: c638365d428b79a44bffd951d749a218, type: 3}
   npcDialogueSounds:
-  - {fileID: 8300000, guid: 0dc7fc04dd4ebae44bc2af48b5af0e53, type: 3}
+  - {fileID: 8300000, guid: 2b48a73fd4bf2ce41b7202bc194ec03e, type: 3}
 --- !u!1 &2046383443
 GameObject:
   m_ObjectHideFlags: 0
@@ -10652,8 +10651,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 753838984}
   - {fileID: 2009145887}
-  - {fileID: 972139426}
-  - {fileID: 2046383446}
   - {fileID: 1220882074}
   - {fileID: 666229438}
   - {fileID: 1519913662}
@@ -10663,6 +10660,8 @@ SceneRoots:
   - {fileID: 197413388}
   - {fileID: 363675068}
   - {fileID: 50748191}
+  - {fileID: 2046383446}
+  - {fileID: 972139426}
   - {fileID: 1638052415}
   - {fileID: 707806891}
   - {fileID: 1662330849}
