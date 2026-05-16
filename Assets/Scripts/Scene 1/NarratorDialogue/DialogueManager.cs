@@ -100,11 +100,24 @@ public class DialogueManager : MonoBehaviour
     {
         if (!dialogueIsPlaying) return;
 
-        if (canContinueToNextLine
-            && currentStory.currentChoices.Count == 0
-            && InputManager.GetInstance().GetSubmitPressed())
+        if (canContinueToNextLine && InputManager.GetInstance().GetSubmitPressed())
         {
-            ContinueStory();
+            if (currentStory.currentChoices.Count == 0)
+            {
+                ContinueStory();
+            }
+            else
+            {
+                // Pick whichever choice is currently selected
+                for (int i = 0; i < choices.Length; i++)
+                {
+                    if (choices[i] == EventSystem.current.currentSelectedGameObject)
+                    {
+                        MakeChoice(i);
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -415,10 +428,10 @@ public class DialogueManager : MonoBehaviour
 
     public void MakeChoice(int choiceIndex)
     {
-        if (canContinueToNextLine)
-        {
-            currentStory.ChooseChoiceIndex(choiceIndex);
-            ContinueStory();
-        }
+        if (!canContinueToNextLine) return;
+    
+        InputManager.GetInstance().RegisterSubmitPressed(); 
+        currentStory.ChooseChoiceIndex(choiceIndex);
+        ContinueStory();
     }
 }
