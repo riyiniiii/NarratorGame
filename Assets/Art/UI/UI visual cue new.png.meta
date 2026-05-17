@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b6de2a31ce6e731479e89ff12aaa7c79
+guid: a3e10f1fef6188c4c8e785f336cc1daa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9144670634822085917
-    second: UI visual cue 1_0
+      213: 3204049205019784072
+    second: UI visual cue new_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI visual cue 1_0
+      name: UI visual cue new_0
       rect:
         serializedVersion: 2
         x: 435
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d1d2488ed7568ee70800000000000000
-      internalID: 9144670634822085917
+      spriteID: 883b314b6c1177c20800000000000000
+      internalID: 3204049205019784072
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI visual cue 1_0: 9144670634822085917
+      UI visual cue new_0: 3204049205019784072
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
