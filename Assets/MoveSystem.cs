@@ -1,17 +1,32 @@
 using UnityEngine;
+using System.Collections;
 
 public class MoveSystem : MonoBehaviour
 {
     public GameObject correctForm;
+    public Camera targetCamera; // assign in the Inspector
 
     private bool moving;
     private bool finish;
 
     private Vector3 offset;
     private Vector3 resetPosition;
+    private float cachedZ;
 
     void Start()
     {
+        resetPosition = transform.position;
+
+        // Fallback to Camera.main if nothing is assigned
+        if (targetCamera == null)
+            targetCamera = Camera.main;
+        
+        StartCoroutine(CaptureResetPosition());
+    }
+
+    IEnumerator CaptureResetPosition()
+    {
+        yield return new WaitForEndOfFrame();
         resetPosition = transform.position;
     }
 
@@ -19,13 +34,14 @@ public class MoveSystem : MonoBehaviour
     {
         if (finish) return;
 
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-                Camera.main.WorldToScreenPoint(transform.position).z)
+        cachedZ = targetCamera.WorldToScreenPoint(transform.position).z;
+
+        Vector3 mouseWorld = targetCamera.ScreenToWorldPoint(
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, cachedZ)
         );
         mouseWorld.z = 0f;
 
-        offset = transform.position - mouseWorld; 
+        offset = transform.position - mouseWorld;
         moving = true;
     }
 
@@ -33,13 +49,12 @@ public class MoveSystem : MonoBehaviour
     {
         if (!moving || finish) return;
 
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-                Camera.main.WorldToScreenPoint(transform.position).z)
+        Vector3 mouseWorld = targetCamera.ScreenToWorldPoint(
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, cachedZ)
         );
         mouseWorld.z = 0f;
 
-        transform.position = mouseWorld + offset; 
+        transform.position = mouseWorld + offset;
     }
 
     void OnMouseUp()
