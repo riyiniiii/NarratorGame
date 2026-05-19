@@ -25,7 +25,7 @@ public class MoveSystem : MonoBehaviour
         );
         mouseWorld.z = 0f;
 
-        offset = transform.position - mouseWorld; // <- this was missing
+        offset = transform.position - mouseWorld; 
         moving = true;
     }
 
