@@ -26,9 +26,13 @@ public class MainMenuController : MonoBehaviour
         OptionPanel.alpha = 0;
         OptionPanel.blocksRaycasts = false;
     }
-
+    
     public void QuitGame()
     {
-        Application.Quit();
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }
