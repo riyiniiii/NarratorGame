@@ -567,6 +567,7 @@ MonoBehaviour:
   visualCue: {fileID: 1647308965}
   emoteAnimator: {fileID: 0}
   inkJSON: {fileID: 4900000, guid: b1adb65c852c4b942a88a0ab9a04ac6a, type: 3}
+  npcDialogueSounds: []
 --- !u!61 &239638265
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2516,6 +2517,9 @@ MonoBehaviour:
   wolf: {fileID: 0}
   sfxAudioSource: {fileID: 0}
   sfxClips: []
+  dialogueAudioSource: {fileID: 0}
+  dialogueSounds: []
+  dialogueSoundFrequency: 4
   npc: {fileID: 1781638822}
   dialoguePanel: {fileID: 1769558276}
   continueIcon: {fileID: 503189130}
@@ -3537,7 +3541,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925186548}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 0b8be8057d60b094faa11d2373c0f357, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: f0ec835c4bf7d42489d8a150f490df10, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}

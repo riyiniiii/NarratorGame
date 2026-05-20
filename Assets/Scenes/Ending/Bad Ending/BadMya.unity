@@ -243,6 +243,7 @@ MonoBehaviour:
   visualCue: {fileID: 1723506320}
   emoteAnimator: {fileID: 0}
   inkJSON: {fileID: 4900000, guid: b1adb65c852c4b942a88a0ab9a04ac6a, type: 3}
+  npcDialogueSounds: []
 --- !u!61 &67978946
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -985,6 +986,11 @@ MonoBehaviour:
   audioSource: {fileID: 472806957}
   wolfHowl: {fileID: 8300000, guid: 6867e78b408f45f40bb56ca0d20826d5, type: 3}
   wolf: {fileID: 0}
+  sfxAudioSource: {fileID: 0}
+  sfxClips: []
+  dialogueAudioSource: {fileID: 0}
+  dialogueSounds: []
+  dialogueSoundFrequency: 4
   npc: {fileID: 108094925}
   dialoguePanel: {fileID: 1412919494}
   continueIcon: {fileID: 914539266}
@@ -995,6 +1001,7 @@ MonoBehaviour:
   - {fileID: 2104816338}
   - {fileID: 888517019}
   - {fileID: 1071309607}
+  postPuzzleInkJSON: {fileID: 0}
 --- !u!1 &593649098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,7 +2440,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1189167214}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 2662e979c54103b4f8a861a9516c61b9, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: e76f12f98fed3cf4484cfd6b4e1087d0, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
