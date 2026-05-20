@@ -471,8 +471,8 @@ Transform:
   m_GameObject: {fileID: 104703776}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.2, y: 15.4, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: -1.2, y: 14.4, z: 0}
+  m_LocalScale: {x: 0.33463794, y: 0.33463794, z: 0.16731897}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1584582497}
@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  height: 0.2
+  height: 0.3
 --- !u!212 &104703779
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -535,7 +535,7 @@ SpriteRenderer:
   m_SortingLayerID: 2037256911
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 594658747156348975, guid: 2c91c0a55a9f93f45925ed0c350d5186, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3550,7 +3550,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &836211024
 Transform:
   m_ObjectHideFlags: 0
@@ -4976,7 +4976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2679245, g: 0.2679245, b: 0.2679245, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6419,6 +6419,8 @@ MonoBehaviour:
   sfxClips:
   - {fileID: 8300000, guid: 28d5a2d0082534545ba092b59f880c85, type: 3}
   - {fileID: 8300000, guid: 7f9f16daa3b187b41a289a44c339e68a, type: 3}
+  - {fileID: 8300000, guid: 9ff6f6a28f7a4d44593135ad872b438e, type: 3}
+  - {fileID: 8300000, guid: b89923935f541484e8f1fd9ee6c30773, type: 3}
   dialogueAudioSource: {fileID: 1633920175}
   dialogueSounds:
   - {fileID: 0}
@@ -8305,10 +8307,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '?'
+  m_text: Fairy
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b0c20e90f129bd4b81776f0cd17f8f8, type: 2}
+  m_sharedMaterial: {fileID: -510058040085079999, guid: 8b0c20e90f129bd4b81776f0cd17f8f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

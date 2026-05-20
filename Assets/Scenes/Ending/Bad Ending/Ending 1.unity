@@ -2780,7 +2780,7 @@ MonoBehaviour:
   autoStartDialogue: 1
   visualCue: {fileID: 0}
   emoteAnimator: {fileID: 2025403908}
-  inkJSON: {fileID: 4900000, guid: 73af13dbaf8f0684fb79410133c1f147, type: 3}
+  inkJSON: {fileID: 4900000, guid: 3774288a40df94546a74bf2ea7c54e98, type: 3}
   npcDialogueSounds:
   - {fileID: 8300000, guid: 0dc7fc04dd4ebae44bc2af48b5af0e53, type: 3}
 --- !u!1 &326941456
@@ -3322,7 +3322,7 @@ Transform:
   m_GameObject: {fileID: 451421643}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -61.34, y: -2.46, z: 836.6743}
+  m_LocalPosition: {x: 29.4, y: -2.46, z: 836.6743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7235,7 +7235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1306927765
 Transform:
   m_ObjectHideFlags: 0
@@ -7866,7 +7866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2679245, g: 0.2679245, b: 0.2679245, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8995,7 +8995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1694912723
 Transform:
   m_ObjectHideFlags: 0
@@ -9808,8 +9808,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

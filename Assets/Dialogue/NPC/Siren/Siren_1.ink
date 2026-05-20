@@ -13,10 +13,10 @@
 
 
 === Sirenchoice1 ===
+# play_sound:SirenLaugh
+"Aren't you the same little witch who tried to 'slay' me before?
+Where is that insufferable Narrator? Isn't he following you?"
 
-"Aren't you the same witch who tried to slay me before?
-Where is the insufferable storyteller who should be describing?
-Isn't he following you?"
 + [??]
     -> nod_choice1
 
@@ -30,7 +30,7 @@ Isn't he following you?"
 
 === confused_choice ===
 
-"In that case, tell me, little witch, can you help me find my scales and in return, I'll help you get away from that man called the storyteller."
+"In that case, little witch, can you help me gather my precious objects and put them in the right place, and in return, <b> I'll help you get away from that Narrator</b>."
 + [nod]
 
 ->start_puzzle
@@ -43,15 +43,18 @@ Isn't he following you?"
 # speaker:Siren
 # portrait:Siren
 # layout:right
-You found them...
+"You did it..."
 
+"As promised, I'll help you get away from the Narrator."
 # play_sound:SirenSong
-'as the siren sings her melody a doorway begins to form' 
+[The siren sings her melody, and a doorway begins to emerge] 
 # play_sound:HiddenDoorNoise
 # show_object:HiddenDoor
-"As promised, I'll help you get away from the Storyteller. It's important that you do not LISTEN to him. Go past whatever 'goal' he has for you. It will break the story and eventually you'll be free."
 
-"Go now quickly."
+"Little witch listen closely, it's important that you do not <b>LISTEN</b> to him."
+"Go past whatever <b>'goal'</b> he has for you. It will break the story, and eventually, you will be free."
+
+"Now go quickly."
 
 -> END
 

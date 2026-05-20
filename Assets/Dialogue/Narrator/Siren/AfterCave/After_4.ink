@@ -1,5 +1,5 @@
 #speaker:Narrator #portrait:Narrator 
-"<i>You cannot leave! Don't you care about Mya? Have you become so cruel as to abandon your beloved cat?</i>"
+"<i>You can't leave now! Don't you care about Mya? Are you going to abandon your cat?</i>"
 ->start
 
 == start ==

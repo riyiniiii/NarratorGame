@@ -1,7 +1,11 @@
 #speaker:Narrator #portrait:Narrator 
-"<i>Wait. Let's restart the story. I'll make things better. Do not leave; you cannot leave me.</i>"
+<i>"Wait. I know we can just restart the story."
 
-"<i>DON'T LEAVE.</i>"
+<i>"I'll make things better."
+
+<i>"Don't leave me here witch.</i>"
+
+<b>"<i>DON'T LEAVE.</i>"
 ->start
 
 == start ==

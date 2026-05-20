@@ -1,7 +1,12 @@
 #speaker:Narrator #portrait:Narrator 
-"<i>Oh. You're back. I had lost sight of you. I was about to go search for you. Okay, back to the <b>goal</b> of the story.</i>"
+"<i>Oh. You're back."
 
-"<i>The little witch was almost home to see her most beloved cat, happier than ever.She went to her house to see her cat.</i>"
+"I thought I lost you, little witch."
+"I was about to go look for you myself."
+"Okay, now we can finally get back to the <b>goal</b> of the story.</i>"
+# play_sound:Ahem
+
+"<i>The little witch was almost finally home.</i>"
 
 ->start
 

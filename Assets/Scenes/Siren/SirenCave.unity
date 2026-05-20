@@ -4676,8 +4676,8 @@ Transform:
   m_GameObject: {fileID: 1027232967}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.13136321, y: 3.3973868, z: 0}
-  m_LocalScale: {x: 1.4477272, y: 1.4477273, z: 0.72386366}
+  m_LocalPosition: {x: 0.1314, y: 5.8315, z: 0}
+  m_LocalScale: {x: 0.27618057, y: 0.2761806, z: 0.1380903}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 679992180}
@@ -4694,8 +4694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a1c20c4072ebc42ad07096a820dc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  height: 0.2
+  speed: 3
+  height: 0.3
 --- !u!212 &1027232970
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4740,7 +4740,7 @@ SpriteRenderer:
   m_SortingLayerID: 1199498547
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 594658747156348975, guid: 2c91c0a55a9f93f45925ed0c350d5186, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8379,6 +8379,7 @@ MonoBehaviour:
   sfxClips:
   - {fileID: 8300000, guid: 6073eeb8f400f8d44a805e4cc91d6926, type: 3}
   - {fileID: 8300000, guid: 075556681eb00994ba5e1a99991e4135, type: 3}
+  - {fileID: 8300000, guid: 23835a94cf180c44a89f63bba65d9397, type: 3}
   dialogueAudioSource: {fileID: 1943508465}
   dialogueSounds:
   - {fileID: 0}

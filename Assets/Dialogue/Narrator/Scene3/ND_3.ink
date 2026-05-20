@@ -1,5 +1,6 @@
 #speaker:Narrator #portrait:Narrator 
-“It appears that someone is having difficulty following commands. Didn't I tell you to stay put? Next time, listen to <b>me</b>. "
+# play_sound:Ahem
+“It appears that someone is having difficulty following orders. Didn't I tell you to stay put? Next time, listen to <b>me</b>. "
 ->start
 
 == start ==

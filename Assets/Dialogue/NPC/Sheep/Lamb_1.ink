@@ -1,17 +1,17 @@
 #speaker:Lamb #portrait:Sheep_Default #layout:right
 -> start
 === start ===
-A cowardly Lamb runs up to you.. 
+<b> A cowardly Lamb runs up to you..<b>
 
 + [Turn around]
     -> next1
 
-+ [ignore]
++ [Ignore]
     "Excuse me..?" Asks the uneasy Lamb. 
     -> next2
 
 === next1 ===
-"Could you help me escape from the <color=red>Wicked Wolf</color>? "He is going to eat me, you see!"   Says the terrified lamb. 
+"Could you help me escape from the <color=red>Wicked Wolf</color>? "He is going to eat me, you see!" Says the terrified lamb. 
 ->next3  
 
 === next2 ===
