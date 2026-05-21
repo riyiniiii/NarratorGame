@@ -14,6 +14,7 @@ public class WolfHorrorEvent : MonoBehaviour
     public float bushOffsetLeft = 1.5f;
 
     private bool eventActive;
+    private bool originalFacingRight; // store player's original facing direction
 
     public void TriggerEvent()
     {
@@ -28,6 +29,11 @@ public class WolfHorrorEvent : MonoBehaviour
 
         // freeze player
         player.canMove = false;
+
+        // store original facing direction, then force player to face left
+        SpriteRenderer playerSR = player.GetComponent<SpriteRenderer>();
+        originalFacingRight = !playerSR.flipX; // true = was facing right
+        playerSR.flipX = true;                 // face left
 
         // reset wolf visuals/state
         wolf.ResetForHorrorEvent();
@@ -102,6 +108,10 @@ public class WolfHorrorEvent : MonoBehaviour
         }
 
         sr.enabled = false;
+
+        // restore player's original facing direction
+        SpriteRenderer playerSR = player.GetComponent<SpriteRenderer>();
+        playerSR.flipX = !originalFacingRight;
 
         eventActive = false;
         player.canMove = true;
